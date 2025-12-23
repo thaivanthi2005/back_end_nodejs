@@ -1,0 +1,13 @@
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# misc
+.env
+.env.example
+.env.local
+.env.staging
+.DS_Store
