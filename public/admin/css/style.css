@@ -1,0 +1,47 @@
+/* ======================
+   Header
+====================== */
+.header {
+  background: #202020;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header .inner-logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ======================
+   Body Layout
+====================== */
+.body {
+  position: relative;
+}
+
+/* Sidebar */
+.body .sider {
+  width: 150px;
+  background: #323232;
+  color: #fff;
+  height: calc(100vh - 56px);
+  position: fixed;
+  top: 56px;
+  left: 0;
+}
+
+/* Main content */
+.body .main {
+  margin: 15px;
+  margin-left: 165px; /* 150px sider + 15px gap */
+  position: relative;
+  width: calc(100% - 180px);
+}
+
+/* ======================
+   End Layout
+====================== */
