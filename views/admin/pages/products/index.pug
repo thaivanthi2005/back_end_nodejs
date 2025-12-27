@@ -1,0 +1,44 @@
+extends ../../layouts/default.pug
+
+block main
+    h1.mb-4 DANH SÁCH SẢN PHẨM
+
+        table.table.table-bordered.table-hover.table-sm.align-middle
+            thead.thead-dark
+                tr
+                    th.text-center STT
+                    th.text-center Hình ảnh
+                    th Tiêu đề
+                    th.text-center Giá
+                    th.text-center Trạng thái
+                    th.text-center Hành động
+            tbody
+                tr
+                    td.text-center 1
+                    td.text-center
+                        img.img-thumbnail(
+                            src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
+                            width="80"
+                        )
+                    td Sản phẩm 1
+                    td.text-center 100$
+                    td.text-center
+                        span.badge.badge-success Hoạt động
+                    td.text-center
+                        button.btn.btn-warning.btn-sm Sửa
+                        button.btn.btn-danger.btn-sm.ml-1 Xóa
+
+                tr
+                    td.text-center 2
+                    td.text-center
+                        img.img-thumbnail(
+                            src="https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"
+                            width="80"
+                        )
+                    td Sản phẩm 2
+                    td.text-center 150$
+                    td.text-center
+                        span.badge.badge-danger Dừng hoạt động
+                    td.text-center
+                        button.btn.btn-warning.btn-sm Sửa
+                        button.btn.btn-danger.btn-sm.ml-1 Xóa
