@@ -1,3 +1,4 @@
+//[GET] /products
 const Product = require("../../models/products.model");
 module.exports.products = async (req, res) => {
   const products2 = await Product.find({
