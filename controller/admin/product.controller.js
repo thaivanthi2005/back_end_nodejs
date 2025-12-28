@@ -2,7 +2,7 @@
 const Product = require("../../models/products.model");
 
 module.exports.index = async (req, res) => {
-  // console.log(req.query);
+  //console.log(req.query);
   let category = [
     {
       name: "Tất cả",
