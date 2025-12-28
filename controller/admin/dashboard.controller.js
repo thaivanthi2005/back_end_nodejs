@@ -1,7 +1,6 @@
 //[GET] /admin/dashboard
 module.exports.dashboard = (req, res) => {
-  res.render("admin/pages/dashboard/index"),
-    {
-      pageTitile: "Trang tổng quan",
-    };
+  res.render("admin/pages/dashboard/index", {
+    pagetitle: "Trang tổng quan",
+  });
 };
