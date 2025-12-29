@@ -2,7 +2,7 @@
 const Product = require("../../models/products.model");
 
 module.exports.index = async (req, res) => {
-  //console.log(req.query);
+  // console.log(req.query);
   let category = [
     {
       name: "Tất cả",
@@ -36,7 +36,9 @@ module.exports.index = async (req, res) => {
   if (req.query.status) {
     find.status = req.query.status;
   }
-
+  if (req.query.keyword) {
+    find.title = req.query.keyword;
+  }
   const products2 = await Product.find(find);
   res.render("admin/pages/products/index", {
     pagetitle: "Trang sản phẩm",
