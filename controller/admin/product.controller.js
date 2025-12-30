@@ -37,7 +37,9 @@ module.exports.index = async (req, res) => {
     find.status = req.query.status;
   }
   if (req.query.keyword) {
-    find.title = req.query.keyword;
+    keyword = req.query.keyword;
+    const regex = new RegExp(keyword, "i");
+    find.title = regex;
   }
   const products2 = await Product.find(find);
   res.render("admin/pages/products/index", {
