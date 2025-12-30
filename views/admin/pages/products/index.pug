@@ -1,33 +1,47 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/filterStatus.pug
+include ../../mixins/search.pug
 block main
     h1.mb-4 DANH SÁCH SẢN PHẨM
 
-        table.table.table-bordered.table-hover.table-sm.align-middle
-            thead.thead-dark
-                tr
-                    th.text-center STT
-                    th.text-center Hình ảnh
-                    th Tiêu đề
-                    th.text-center Giá
-                    th.text-center Trạng thái
-                    th.text-center Hành động
-            tbody
-                each val, index in products
-                    tr
-                        td.text-center #{index + 1}
-                        td.text-center
-                            img.img-thumbnail(
-                                src= val.thumnail,
-                                width="80"
-                            )
-                        td #{val.title}
-                        td.text-center #{val.price}
-                        td.text-center
-                            if(val.status == "In Stock")
-                                span.badge.badge-success Còn hàng
-                            else
-                                span.badge.badge-danger Hết hàng
-                        td.text-center
-                            button.btn.btn-warning.btn-sm Sửa
-                            button.btn.btn-danger.btn-sm.ml-1 Xóa
+        .card.mb-3
+            .card-header Bộ lọc và Tìm kiếm
+            .card-body
+                .row
+                    .col-6
+                        +filterStatus(category)
+                    .col-6
+                        +search(keyword)
+
+            
+        .card.mb-3
+            .card-header Danh sách sản phẩm
+            .card-body
+                table.table.table-bordered.table-hover.table-sm.align-middle
+                    thead.thead-dark
+                        tr
+                            th.text-center STT
+                            th.text-center Hình ảnh
+                            th Tiêu đề
+                            th.text-center Giá
+                            th.text-center Trạng thái
+                            th.text-center Hành động
+                    tbody
+                        each val, index in products
+                            tr
+                                td.text-center #{index + 1}
+                                td.text-center
+                                    img.img-thumbnail(
+                                        src= val.thumnail,
+                                        width="80"
+                                    )
+                                td #{val.title}
+                                td.text-center #{val.price}
+                                td.text-center
+                                    if(val.status == "InStock")
+                                        span.badge.badge-success Còn hàng
+                                    else
+                                        span.badge.badge-danger Hết hàng
+                                td.text-center
+                                    button.btn.btn-warning.btn-sm Sửa
+                                    button.btn.btn-danger.btn-sm.ml-1 Xóa
