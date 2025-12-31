@@ -2,7 +2,7 @@
 const Product = require("../../models/products.model");
 module.exports.products = async (req, res) => {
   const products2 = await Product.find({
-    status: "In Stock",
+    status: "InStock",
     delete: false,
   });
   const newProduct = products2.map((item) => {
@@ -12,6 +12,8 @@ module.exports.products = async (req, res) => {
     ).toFixed(0);
     return item;
   });
+
+  console.log(products2);
   res.render("client/pages/products/index", {
     pagetitle: "Danh sách sản phẩm",
     products: newProduct,
