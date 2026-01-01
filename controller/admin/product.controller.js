@@ -2,6 +2,7 @@
 const Product = require("../../models/products.model");
 const filterStatusHelper = require("../../helper/filterstatus");
 const searchHelper = require("../../helper/search");
+const paginatonHelper = require("../../helper/pagination");
 module.exports.index = async (req, res) => {
   // console.log(req.query);
   const filterStatus = filterStatusHelper(req.query);
@@ -21,20 +22,26 @@ module.exports.index = async (req, res) => {
   }
 
   //pagination
-  let objectPagination = {
-    currentPage: 1,
-    limitItem: 4,
-  };
-
-  if (req.query.page) {
-    objectPagination.currentPage = parseInt(req.query.page);
-  }
-  objectPagination.skip =
-    (objectPagination.currentPage - 1) * objectPagination.limitItem;
-
   const coutProduct = await Product.countDocuments(find);
-  const totalPage = Math.ceil(coutProduct / objectPagination.limitItem);
-  objectPagination.totalPage = totalPage;
+
+  let objectPagination = paginatonHelper(
+    {
+      currentPage: 1,
+      limitItem: 4,
+    },
+    req.query,
+    coutProduct
+  );
+
+  // if (req.query.page) {
+  //   objectPagination.currentPage = parseInt(req.query.page);
+  // }
+  // objectPagination.skip =
+  //   (objectPagination.currentPage - 1) * objectPagination.limitItem;
+
+  // const coutProduct = await Product.countDocuments(find);
+  // const totalPage = Math.ceil(coutProduct / objectPagination.limitItem);
+  // objectPagination.totalPage = totalPage;
   //end pagination
 
   const products2 = await Product.find(find)
