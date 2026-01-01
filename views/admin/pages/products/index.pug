@@ -38,13 +38,28 @@ block main
                                     )
                                 td #{val.title}
                                 td.text-center #{val.price}
-                                td.text-center
+                                td
                                     if(val.status == "InStock")
-                                        span.badge.badge-success Còn hàng
+                                        a(href="javascript:;"
+                                        data-status = "InStock"
+                                        data-id = val.id
+                                        button-change-status
+                                        class="badge badge-success") Còn hàng
                                     else
-                                        span.badge.badge-danger Hết hàng
+                                        a(href="javascript:;"
+                                        data-status = "OutStock"
+                                        data-id = val.id
+                                        button-change-status
+                                        class="badge badge-danger") Hết hàng
                                 td.text-center
                                     button.btn.btn-warning.btn-sm Sửa
                                     button.btn.btn-danger.btn-sm.ml-1 Xóa
     +pagination(pagination)
 
+    form(
+        action="",
+        method="POST",
+        id="form-change-status",
+        data-path=`${prefixAdmin}/products/change-status`
+    )
+    script(src="/admin/js/products.js")
