@@ -54,3 +54,58 @@ if (button_Pagination) {
 }
 
 // End_Paginations
+
+//Checkbox
+const checkBoxMulti = document.querySelector("[checkbox-multi]");
+if (checkBoxMulti) {
+  const inputCheckALL = checkBoxMulti.querySelector("input[name='checkall']");
+  const inputsID = checkBoxMulti.querySelectorAll("input[name='id']");
+
+  inputCheckALL.addEventListener("click", () => {
+    if (inputCheckALL.checked) {
+      inputsID.forEach((input) => {
+        input.checked = true;
+      });
+    } else {
+      inputsID.forEach((input) => {
+        input.checked = false;
+      });
+    }
+  });
+
+  inputsID.forEach((input) => {
+    input.addEventListener("click", () => {
+      const coutCheck = checkBoxMulti.querySelectorAll(
+        "input[name='id']:checked"
+      ).length;
+      if (coutCheck == 4) {
+        inputCheckALL.checked = true;
+      } else inputCheckALL.checked = false;
+    });
+  });
+}
+//End Checkbox
+
+//Form change-Multi
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if (formChangeMulti) {
+  formChangeMulti.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const checkBoxMulti = document.querySelector("[checkbox-multi]");
+    const inputsChecked = checkBoxMulti.querySelectorAll(
+      "input[name='id']:checked"
+    );
+    if (inputsChecked.length > 0) {
+      let tmp = [];
+      inputsChecked.forEach((input) => {
+        tmp.push(input.value);
+      });
+      const InputID = formChangeMulti.querySelector("input[name = 'ids']");
+      InputID.value = tmp.join(",");
+      formChangeMulti.submit();
+    } else {
+      alert("VUI LÒNG CHỌN 1 SẢN PHẨM");
+    }
+  });
+}
+//End Form change-Multi

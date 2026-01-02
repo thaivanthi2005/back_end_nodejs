@@ -2,6 +2,7 @@ const Product = require("../../models/products.model");
 const filterStatusHelper = require("../../helper/filterstatus");
 const searchHelper = require("../../helper/search");
 const paginatonHelper = require("../../helper/pagination");
+const e = require("method-override");
 //[GET] /admin/products
 module.exports.index = async (req, res) => {
   // console.log(req.query);
@@ -56,7 +57,7 @@ module.exports.index = async (req, res) => {
     pagination: objectPagination,
   });
 };
-//[GET] /change-status/:status/:id
+//[PATH] /change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
   const status = req.params.status;
   const id = req.params.id;
@@ -64,4 +65,21 @@ module.exports.changeStatus = async (req, res) => {
   await Product.updateOne({ _id: id }, { status: status });
 
   res.redirect("../..");
+};
+
+module.exports.changeMulti = async (req, res) => {
+  const type = req.body.type;
+  const ids = req.body.ids.split(",");
+  console.log(type);
+  switch (type) {
+    case "InStock":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "InStock" });
+      break;
+    case "OutStock":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "OutStock" });
+      break;
+    default:
+      break;
+  }
+  res.redirect("./");
 };
