@@ -64,13 +64,12 @@ module.exports.changeStatus = async (req, res) => {
 
   await Product.updateOne({ _id: id }, { status: status });
 
-  res.redirect("../..");
+  res.redirect(req.get("referer"));
 };
-
+//[PATCH] /change-multi
 module.exports.changeMulti = async (req, res) => {
   const type = req.body.type;
   const ids = req.body.ids.split(",");
-  console.log(type);
   switch (type) {
     case "InStock":
       await Product.updateMany({ _id: { $in: ids } }, { status: "InStock" });
@@ -81,5 +80,14 @@ module.exports.changeMulti = async (req, res) => {
     default:
       break;
   }
-  res.redirect("./");
+  res.redirect(req.get("referer"));
+};
+
+//[Patch] /delete/:id
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+
+  await Product.deleteOne({ _id: id });
+
+  res.redirect(req.get("referer"));
 };
