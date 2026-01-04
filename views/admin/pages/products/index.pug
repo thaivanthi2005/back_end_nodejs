@@ -30,8 +30,10 @@ block main
                             .d-flex.align-items-start
                                 .form-group
                                 select(name="type" class="form-control")
+                                    option(disabled selected) -- Chọn hành động --
                                     option(value="InStock") Còn hàng
                                     option(value="OutStock") Hết hàng
+                                    option(value="delete-all") Xóa tất cả
                                 .form-group
                                 input(
                                     type="text"
