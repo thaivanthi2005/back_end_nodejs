@@ -46,6 +46,7 @@ module.exports.index = async (req, res) => {
   //end pagination
 
   const products2 = await Product.find(find)
+    .sort({ position: "desc" })
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
@@ -82,6 +83,13 @@ module.exports.changeMulti = async (req, res) => {
         { _id: { $in: ids } },
         { delete: true, deletedAt: new Date() }
       );
+      break;
+    case "change-position":
+      for (const item of ids) {
+        let [id, position] = item.split("-");
+        position = parseInt(position);
+        await Product.updateOne({ _id: id }, { position: position });
+      }
       break;
     default:
       break;

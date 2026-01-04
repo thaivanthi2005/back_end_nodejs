@@ -34,6 +34,7 @@ block main
                                     option(value="InStock") Còn hàng
                                     option(value="OutStock") Hết hàng
                                     option(value="delete-all") Xóa tất cả
+                                    option(value="change-position") Thay đổi vị trí
                                 .form-group
                                 input(
                                     type="text"
@@ -52,7 +53,8 @@ block main
                                 input(type="checkbox", name="checkall")
                             th.text-center STT
                             th.text-center Hình ảnh
-                            th Tiêu đề
+                            th.text-center Tiêu đề
+                            th.text-center Vị trí
                             th.text-center Giá
                             th.text-center Trạng thái
                             th.text-center Hành động
@@ -73,6 +75,13 @@ block main
                                     )
                                 td #{val.title}
                                 td.text-center #{val.price}
+                                td
+                                    input(
+                                        type="number"
+                                        value = val.position  
+                                        style ="width: 60px;"
+                                        name = "position"
+                                    )
                                 td
                                     if(val.status == "InStock")
                                         a(href="javascript:;"

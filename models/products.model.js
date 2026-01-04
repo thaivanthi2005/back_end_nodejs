@@ -11,6 +11,7 @@ const product_schema = new mongoose.Schema({
   rating: Number,
   delete: Boolean,
   deletedAt: Date,
+  position: Number,
 });
 const Product = mongoose.model("Product", product_schema, "project1");
 
