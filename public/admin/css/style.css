@@ -45,3 +45,20 @@
 /* ======================
    End Layout
 ====================== */
+
+/* ===== Show Alert ===== */
+[show-alert] {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
+  transition: right 0.5s ease, opacity 0.5s ease;
+}
+
+/* Khi ẩn */
+[show-alert].alert-hidden {
+  right: -100%;
+  opacity: 0;
+  pointer-events: none;
+}
+/* ===== End Show Alert ===== */

@@ -54,7 +54,7 @@ module.exports.changeStatus = async (req, res) => {
 
   await Product.updateOne({ _id: id }, { status: status });
 
-  req.flash("success", "CẬP NHẠT THÀNH CÔNG");
+  req.session.success = ["CẬP NHẬT THÀNH CÔNG"];
 
   res.redirect(req.get("referer"));
 };
@@ -94,5 +94,7 @@ module.exports.deleteItem = async (req, res) => {
 
   // await Product.deleteOne({ _id: id });
   await Product.updateOne({ _id: id }, { delete: true, deletedAt: new Date() });
+  req.session.success = ["CẬP NHẬT THÀNH CÔNG"];
+
   res.redirect(req.get("referer"));
 };

@@ -1,5 +1,4 @@
 // Button-status
-
 const button_Satus = document.querySelectorAll("[button-status]");
 if (button_Satus.length > 0) {
   let url = new URL(window.location.href);
@@ -16,7 +15,6 @@ if (button_Satus.length > 0) {
     });
   });
 }
-
 //End_bt_STATUS
 
 //FORM SEARCH
@@ -124,3 +122,13 @@ if (formChangeMulti) {
   });
 }
 //End Form change-Multi
+
+//SHOW ALERT
+const alert_time = document.querySelector("[show-alert]");
+if (alert_time) {
+  const time = parseInt(alert_time.getAttribute("data-time"));
+  setTimeout(() => {
+    alert_time.classList.add("alert-hidden");
+  }, time);
+}
+//END SHOW ALERT

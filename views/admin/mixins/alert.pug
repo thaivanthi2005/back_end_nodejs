@@ -1,0 +1,12 @@
+mixin alert(success, error)
+    if success.length
+        div(
+            class="alert alert-success"
+            show-alert
+            data-time = "5000"
+        )
+            = success[0]
+
+    if error.length
+        .alert.alert-danger
+            = error[0]

@@ -2,17 +2,10 @@ extends ../../layouts/default.pug
 include ../../mixins/filterStatus.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
+include ../../mixins/alert.pug
 block main
 
-    if success.length
-        .alert.alert-success
-            = success[0]
-
-    if error.length
-        .alert.alert-danger
-            = error[0]
-
-
+    +alert(success, error)
     h1.mb-4 DANH SÁCH SẢN PHẨM
         .card.mb-3
             .card-header Bộ lọc và Tìm kiếm

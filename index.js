@@ -2,7 +2,6 @@ const express = require("express");
 const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const flash = require("connect-flash");
 require("dotenv").config();
 const app = express();
 
@@ -21,6 +20,7 @@ app.set("view engine", "pug");
 app.use(express.static("public"));
 app.locals.prefixAdmin = system_config.prefixAdmin;
 //flash
+// ===== SESSION =====
 app.use(
   session({
     secret: "secret_key",
@@ -29,14 +29,19 @@ app.use(
   })
 );
 
-app.use(flash());
-
-// đưa flash ra view Pug
+// ===== FLASH TỰ VIẾT =====
 app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
+  // đưa ra view
+  res.locals.success = req.session.success || [];
+  res.locals.error = req.session.error || [];
+
+  // clear sau khi đọc
+  req.session.success = [];
+  req.session.error = [];
+
   next();
 });
+
 //End flash
 route(app);
 route_admin(app);
