@@ -34,17 +34,6 @@ module.exports.index = async (req, res) => {
     coutProduct
   );
 
-  // if (req.query.page) {
-  //   objectPagination.currentPage = parseInt(req.query.page);
-  // }
-  // objectPagination.skip =
-  //   (objectPagination.currentPage - 1) * objectPagination.limitItem;
-
-  // const coutProduct = await Product.countDocuments(find);
-  // const totalPage = Math.ceil(coutProduct / objectPagination.limitItem);
-  // objectPagination.totalPage = totalPage;
-  //end pagination
-
   const products2 = await Product.find(find)
     .sort({ position: "desc" })
     .limit(objectPagination.limitItem)
@@ -64,6 +53,8 @@ module.exports.changeStatus = async (req, res) => {
   const id = req.params.id;
 
   await Product.updateOne({ _id: id }, { status: status });
+
+  req.flash("success", "CẬP NHẠT THÀNH CÔNG");
 
   res.redirect(req.get("referer"));
 };
@@ -97,7 +88,7 @@ module.exports.changeMulti = async (req, res) => {
   res.redirect(req.get("referer"));
 };
 
-//[Patch] /delete/:id
+//[DELETE] /delete/:id
 module.exports.deleteItem = async (req, res) => {
   const id = req.params.id;
 
