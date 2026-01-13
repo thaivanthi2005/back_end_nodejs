@@ -3,6 +3,7 @@ include ../../mixins/filterStatus.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/alert.pug
+include ../../mixins/form-change-multi.pug
 block main
 
     +alert(success, error)
@@ -24,28 +25,11 @@ block main
                 .card.mb-3
                     .card-header Danh sách
                     .card-body
-                        form(
-                            action=`${prefixAdmin}/products/change-multi?_method=PATCH`
-                            method="POST"
-                            form-change-multi
-                            )
-                            .d-flex.align-items-start
-                                .form-group
-                                select(name="type" class="form-control")
-                                    option(disabled selected) -- Chọn hành động --
-                                    option(value="InStock") Còn hàng
-                                    option(value="OutStock") Hết hàng
-                                    option(value="delete-all") Xóa tất cả
-                                    option(value="change-position") Thay đổi vị trí
-                                .form-group
-                                input(
-                                    type="text"
-                                    name="ids"
-                                    value=""
-                                    class="form-control"
-                                )
-                                button(type="submit" class="btn btn-primary") Áp dụng
-
+                        .row 
+                            .col-8
+                                +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+                            .col-4
+                                a(href=`${prefixAdmin}/products/create` class="btn btn-outline-success") Thêm sản phẩm
 
                 table(class="table table-hover table-sm"
                 checkbox-multi)
