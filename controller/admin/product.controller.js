@@ -3,7 +3,6 @@ const filterStatusHelper = require("../../helper/filterstatus");
 const searchHelper = require("../../helper/search");
 const paginatonHelper = require("../../helper/pagination");
 const system_config = require("../../config/system");
-const e = require("method-override");
 //[GET] /admin/products
 module.exports.index = async (req, res) => {
   // console.log(req.query);
@@ -111,17 +110,17 @@ module.exports.create_products = async (req, res) => {
 //[POST] /create
 
 module.exports.create_products_post = async (req, res) => {
-  console.log(req.body);
   req.body.price = parseInt(req.body.price);
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
+  req.body.thumbnail = `/uploads/${req.file.filename}`;
   if (req.body.position == "") {
     const countProduct = await Product.countDocuments({});
     req.body.position = countProduct + 1;
   } else {
     req.body.position = parseInt(req.body.position);
   }
-
+  console.log(req.file);
   const product = new Product(req.body);
   await product.save();
   res.redirect(`${system_config.prefixAdmin}/products`);
