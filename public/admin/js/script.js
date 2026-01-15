@@ -138,7 +138,6 @@ const uploadImage = document.querySelector("[upload-image]");
 if (uploadImage) {
   const updateImageInput = document.querySelector("[upload-image-input]");
   const updateImagePreview = document.querySelector("[upload-image-preview]");
-  console.log(updateImageInput);
   updateImageInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -147,3 +146,13 @@ if (uploadImage) {
   });
 }
 //upload-image-end
+
+//delete-image-preview
+const deleteImagePre = document.querySelector("[upload-image-delete]");
+
+if (deleteImagePre)
+  deleteImagePre.addEventListener("click", () => {
+    document.querySelector("[upload-image-input]").value = "";
+    document.querySelector("[upload-image-preview]").src = "";
+  });
+//delete-image-preview end

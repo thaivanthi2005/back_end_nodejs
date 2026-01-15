@@ -16,4 +16,6 @@ router.post(
   upload.single("thumbnail"),
   controller.create_products_post
 );
+
+router.get("/edit/:id", controller.edit_products);
 module.exports = router;
