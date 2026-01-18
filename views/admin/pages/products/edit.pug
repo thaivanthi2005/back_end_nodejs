@@ -17,15 +17,17 @@ block main
         type="text"
         id="title"
         name="title"
+        value=`${products.title}`
       )
 
     //- Mô tả
     .form-group
       label(for="desc") Mô tả
-      textarea.form-control(
+      input.form-control(
         id="desc"
         name="description"
         rows="5"
+        value=`${products.description}`
       )
 
     //- Giá
@@ -35,8 +37,8 @@ block main
         type="number"
         id="price"
         name="price"
-        value="0"
         min="0"
+        value=`${products.price}`
       )
 
     //- Giảm giá
@@ -46,8 +48,8 @@ block main
         type="number"
         id="discount"
         name="discountPercentage"
-        value="0"
         min="0"
+        value=`${products.discountPercentage}`
       )
 
     //- Số lượng
@@ -57,8 +59,8 @@ block main
         type="number"
         id="stock"
         name="stock"
-        value="0"
         min="0"
+        value=`${products.stock}`
       )
 
     //- Ảnh
@@ -89,6 +91,7 @@ block main
         name="position"
         placeholder="Tự động tăng"
         min="1"
+        value=`${products.position}`
       )
 
     //- Trạng thái
@@ -115,4 +118,4 @@ block main
 
     //- Submit
     .form-group
-      button.btn.btn-primary(type="submit") Thêm sản phẩm
+      button.btn.btn-primary(type="submit" buttonEdit) Sửa sản phẩm
