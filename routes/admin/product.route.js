@@ -14,8 +14,13 @@ router.get("/create", controller.create_products);
 router.post(
   "/create",
   upload.single("thumbnail"),
-  controller.create_products_post
+  controller.create_products_post,
 );
 
 router.get("/edit/:id", controller.edit_products);
+router.patch(
+  "/edit/:id",
+  upload.single("thumbnail"),
+  controller.edit_products_patch,
+);
 module.exports = router;

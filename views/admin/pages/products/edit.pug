@@ -4,7 +4,7 @@ block main
   h1.mb-4 Sửa sản phẩm
   +alert-error(success, error)
   form(
-    action=``
+    action=`${prefixAdmin}/products/edit/${products.id}?_method=PATCH`
     method="POST"
     enctype="multipart/form-data"
     id="form-edit-product"
@@ -17,7 +17,7 @@ block main
         type="text"
         id="title"
         name="title"
-        value=`${products.title}`
+        value=products.title
       )
 
     //- Mô tả
@@ -27,7 +27,7 @@ block main
         id="desc"
         name="description"
         rows="5"
-        value=`${products.description}`
+        value=products.description
       )
 
     //- Giá
@@ -38,7 +38,7 @@ block main
         id="price"
         name="price"
         min="0"
-        value=`${products.price}`
+        value=products.price
       )
 
     //- Giảm giá
@@ -49,7 +49,7 @@ block main
         id="discount"
         name="discountPercentage"
         min="0"
-        value=`${products.discountPercentage}`
+        value=products.discountPercentage
       )
 
     //- Số lượng
@@ -60,7 +60,7 @@ block main
         id="stock"
         name="stock"
         min="0"
-        value=`${products.stock}`
+        value=products.stock
       )
 
     //- Ảnh
@@ -75,10 +75,11 @@ block main
         upload-image-input
       )
       img(
-        src=""
+        src=products.thumbnail
         alt="Preview"
         width="200"
         upload-image-preview
+        value=products.thumbnail
       )
       button.btn.btn-secondary(type="button" upload-image-delete) Xóa ảnh
 
@@ -91,7 +92,7 @@ block main
         name="position"
         placeholder="Tự động tăng"
         min="1"
-        value=`${products.position}`
+        value=products.position
       )
 
     //- Trạng thái
@@ -118,4 +119,4 @@ block main
 
     //- Submit
     .form-group
-      button.btn.btn-primary(type="submit" buttonEdit) Sửa sản phẩm
+      button.btn.btn-primary(type="submit") Sửa sản phẩm

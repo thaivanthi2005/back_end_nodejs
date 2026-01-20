@@ -157,15 +157,46 @@ module.exports.create_products_post = async (req, res) => {
 
 //[GET] /admin/products/edit/:id
 module.exports.edit_products = async (req, res) => {
-  console.log(req.params.id);
   let find = {
     delete: false,
     _id: req.params.id,
   };
   const products = await Product.findOne(find);
-  console.log(products);
   res.render("admin/pages/products/edit", {
     pagetitle: "Sửa Sản Phẩm",
     products: products,
   });
+};
+
+//[PATCH]
+module.exports.edit_products_patch = async (req, res) => {
+  const id = req.params.id;
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  if (req.body.position == "") {
+    const countProduct = await Product.countDocuments({});
+    req.body.position = countProduct + 1;
+  } else {
+    req.body.position = parseInt(req.body.position);
+  }
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
+  const updateData = {
+    title: req.body.title,
+    description: req.body.description,
+    price: req.body.price,
+    discountPercentage: req.body.discountPercentage,
+    stock: req.body.stock,
+    position: req.body.position,
+    status: req.body.status,
+  };
+
+  if (req.file) {
+    updateData.thumbnail = req.body.thumbnail;
+  }
+
+  await Product.updateOne({ _id: id }, updateData);
+  res.redirect(`${system_config.prefixAdmin}/products`);
 };
