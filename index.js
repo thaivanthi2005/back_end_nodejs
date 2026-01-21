@@ -16,9 +16,10 @@ app.use(methodOverride("_method"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
-app.use(express.static("public"));
+
+app.use(express.static(`${__dirname}/public`));
 app.locals.prefixAdmin = system_config.prefixAdmin;
 //flash
 // ===== SESSION =====
@@ -27,7 +28,7 @@ app.use(
     secret: "secret_key",
     resave: false,
     saveUninitialized: true,
-  })
+  }),
 );
 
 // ===== FLASH TỰ VIẾT =====
