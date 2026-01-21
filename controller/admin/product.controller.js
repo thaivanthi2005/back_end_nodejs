@@ -196,9 +196,12 @@ module.exports.edit_products_patch = async (req, res) => {
   if (req.file) {
     updateData.thumbnail = req.body.thumbnail;
   }
-
-  await Product.updateOne({ _id: id }, updateData);
-  res.redirect(`${system_config.prefixAdmin}/products`);
+  try {
+    await Product.updateOne({ _id: id }, updateData);
+    res.redirect(`${system_config.prefixAdmin}/products`);
+  } catch (error) {
+    res.redirect(`${system_config.prefixAdmin}/products`);
+  }
 };
 
 //[GET] /admin/products/detail/:id

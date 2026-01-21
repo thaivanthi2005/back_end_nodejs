@@ -1,0 +1,34 @@
+extends ../../layouts/default.pug
+
+block main
+  .product
+    // Ảnh + badge giảm giá
+    .product-image
+      img(src=product.thumbnail, alt=product.title)
+
+      if product.discountPercentage > 0
+        span.discount-badge
+          | -#{product.discountPercentage}%
+
+    // Thông tin sản phẩm
+    .product-info
+      h1= product.title
+      p.description= product.description
+
+      // Giá
+      if product.discountPercentage > 0
+        p.price-box
+          span.price= (product.price * (100 - product.discountPercentage) / 100) + ' ₫'
+          span.old-price= product.price + ' ₫'
+      else
+        p.price= product.price + ' ₫'
+
+      // Tồn kho
+      p.stock
+        if product.stock > 0
+          | Tình trạng: Còn hàng (#{product.stock} sản phẩm)
+        else
+          | Tình trạng: Hết hàng
+
+      // Nút mua
+      button.btn-add(type="button") Thêm vào giỏ hàng

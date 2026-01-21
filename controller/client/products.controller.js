@@ -13,9 +13,20 @@ module.exports.products = async (req, res) => {
     return item;
   });
 
-  console.log(products2);
   res.render("client/pages/products/index", {
     pagetitle: "Danh sách sản phẩm",
     products: newProduct,
   });
+};
+
+module.exports.detail = async (req, res) => {
+  const find = {
+    delete: false,
+    slug: req.params.slug,
+  };
+  const product = await Product.findOne(find);
+  res.render("client/pages/products/detail", {
+    product: product,
+  });
+  // res.send("pkle");
 };
