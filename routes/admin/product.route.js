@@ -23,4 +23,5 @@ router.patch(
   upload.single("thumbnail"),
   controller.edit_products_patch,
 );
+router.get("/detail/:id", controller.detail_products);
 module.exports = router;

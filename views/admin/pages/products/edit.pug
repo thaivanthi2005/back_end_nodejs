@@ -104,7 +104,7 @@ block main
           id="statusActive"
           name="status"
           value="InStock"
-          checked
+          checked = true ? products.status == 'InStock' : false
         )
         label.form-check-label(for="statusActive") Hoạt động
 
@@ -114,6 +114,7 @@ block main
           id="statusInactive"
           name="status"
           value="OutStock"
+          checked = true ? products.status == 'OutStock' : false
         )
         label.form-check-label(for="statusInactive") Dừng hoạt động
 

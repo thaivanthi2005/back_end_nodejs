@@ -168,7 +168,7 @@ module.exports.edit_products = async (req, res) => {
   });
 };
 
-//[PATCH]
+//[PATCH] /admin/products/edit/:id
 module.exports.edit_products_patch = async (req, res) => {
   const id = req.params.id;
   req.body.price = parseInt(req.body.price);
@@ -199,4 +199,15 @@ module.exports.edit_products_patch = async (req, res) => {
 
   await Product.updateOne({ _id: id }, updateData);
   res.redirect(`${system_config.prefixAdmin}/products`);
+};
+
+//[GET] /admin/products/detail/:id
+
+module.exports.detail_products = async (req, res) => {
+  console.log(req.params.id);
+  const product = await Product.findOne({ _id: req.params.id });
+  console.log(product);
+  res.render("admin/pages/products/detail", {
+    product: product,
+  });
 };
