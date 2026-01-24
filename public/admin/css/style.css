@@ -180,3 +180,44 @@
 }
 
 /* END detail products */
+
+/* END detail products */
+
+/* mixin_sort */
+/* wrapper */
+div[sort] {
+  display: flex;
+  align-items: center;
+}
+
+/* select */
+div[sort] select {
+  border-radius: 5px;
+  border: 5px solid #9abeec;
+  background-color: #fefffe;
+  padding: 2px 12px;
+  font-size: 17px;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+div[sort] select:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* focus */
+div[sort] select:focus {
+  outline: none;
+  border-color: #adb5bd;
+  box-shadow: 0 0 0 0.15rem rgba(108, 117, 125, 0.2);
+}
+
+/* option */
+div[sort] option {
+  font-size: 18px;
+}
+
+/* END mixin_sort */

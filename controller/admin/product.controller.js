@@ -147,9 +147,6 @@ module.exports.create_products_post = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
   const product = new Product(req.body);
   await product.save();
   res.redirect(`${system_config.prefixAdmin}/products`);
@@ -179,9 +176,6 @@ module.exports.edit_products_patch = async (req, res) => {
     req.body.position = countProduct + 1;
   } else {
     req.body.position = parseInt(req.body.position);
-  }
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
   }
   const updateData = {
     title: req.body.title,

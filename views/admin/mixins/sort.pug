@@ -1,0 +1,13 @@
+mixin form-sort()
+    div(sort)
+        a Sắp xếp theo:
+        select(name="sort" 
+        class="form-control form-control-sm w-auto d-inline-block"
+        sort-select) 
+                option(value="position-desc") Vị trí giảm dần
+                option(value="position-asc") Vị trí tăng dần
+                option(value="price-desc") Giá giảm dần
+                option(value="price-asc") Giá tăng dần
+                option(value="title-desc") Tiêu đề A-Z
+                option(value="title-asc") Tiêu đề Z-A
+        button(type="submit" class="btn btn-sm btn-primary ml-2") Clear

@@ -4,6 +4,7 @@ include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/alert.pug
 include ../../mixins/form-change-multi.pug
+include ../../mixins/sort.pug
 block main
 
     +alert(success, error)
@@ -12,14 +13,16 @@ block main
             .card-header Bộ lọc và Tìm kiếm
             .card-body
                 .row
-                    .col-6
-                        +filterStatus(category)
-                    .col-6
+                    .col-4
+                        +form-sort()
+                    .col-4
+                        +filterStatus(category)   
+                    .col-4
                         +search(keyword)
+
 
             
         .card.mb-3
-            .card-header Danh sách sản phẩm
             .card-body
                 
                 .card.mb-3
@@ -40,8 +43,8 @@ block main
                             th.text-center STT
                             th.text-center Hình ảnh
                             th.text-center Tiêu đề
-                            th.text-center Vị trí
                             th.text-center Giá
+                            th.text-center Vị trí
                             th.text-center Trạng thái
                             th.text-center Hành động
                     tbody
