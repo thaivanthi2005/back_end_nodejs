@@ -74,7 +74,7 @@ if (checkBoxMulti) {
   inputsID.forEach((input) => {
     input.addEventListener("click", () => {
       const coutCheck = checkBoxMulti.querySelectorAll(
-        "input[name='id']:checked"
+        "input[name='id']:checked",
       ).length;
       if (coutCheck == 4) {
         inputCheckALL.checked = true;
@@ -91,7 +91,7 @@ if (formChangeMulti) {
     e.preventDefault();
     const checkBoxMulti = document.querySelector("[checkbox-multi]");
     const inputsChecked = checkBoxMulti.querySelectorAll(
-      "input[name='id']:checked"
+      "input[name='id']:checked",
     );
 
     const typeChange = e.target.elements.type.value;
@@ -156,3 +156,25 @@ if (deleteImagePre)
     document.querySelector("[upload-image-preview]").src = "";
   });
 //delete-image-preview end
+
+//sort product
+const sort_select = document.querySelectorAll("[sort-select]");
+if (sort_select) {
+  let url = new URL(window.location.href);
+  sort_select.forEach((item_sort) => {
+    item_sort.addEventListener("change", (e) => {
+      const [valueKey, value] = e.target.value.split("-");
+      url.searchParams.set("valueKey", valueKey);
+      url.searchParams.set("value", value);
+      if (valueKey && value) {
+        const stringSort = `${valueKey}-${value}`;
+        const optionSelect = sort_select.querySelector(
+          `option[value='${stringSort}']`,
+        );
+      }
+      console.log(optionSelect);
+      // window.location.href = url.href;
+    });
+  });
+}
+//END sort product

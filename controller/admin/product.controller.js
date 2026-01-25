@@ -11,20 +11,15 @@ module.exports.index = async (req, res) => {
   let find = {
     delete: false,
   };
-
   if (req.query.status) {
     find.status = req.query.status;
   }
-
   const objectSearch = searchHelper(req.query);
-
   if (objectSearch.regex) {
     find.title = objectSearch.regex;
   }
-
   //pagination
   const coutProduct = await Product.countDocuments(find);
-
   let objectPagination = paginatonHelper(
     {
       currentPage: 1,
@@ -33,9 +28,11 @@ module.exports.index = async (req, res) => {
     req.query,
     coutProduct,
   );
-
+  //end pagination
   const products2 = await Product.find(find)
-    .sort({ position: "desc" })
+    // .sort({
+    //   [req.query.valueKey]: req.query.value === "desc" ? -1 : 1,
+    // })
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
