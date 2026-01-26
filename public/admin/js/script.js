@@ -158,23 +158,26 @@ if (deleteImagePre)
 //delete-image-preview end
 
 //sort product
-const sort_select = document.querySelectorAll("[sort-select]");
-if (sort_select) {
+const sort = document.querySelectorAll("[sort]");
+if (sort) {
   let url = new URL(window.location.href);
-  sort_select.forEach((item_sort) => {
-    item_sort.addEventListener("change", (e) => {
-      const [valueKey, value] = e.target.value.split("-");
-      url.searchParams.set("valueKey", valueKey);
-      url.searchParams.set("value", value);
-      if (valueKey && value) {
-        const stringSort = `${valueKey}-${value}`;
-        const optionSelect = sort_select.querySelector(
-          `option[value='${stringSort}']`,
-        );
-      }
-      console.log(optionSelect);
-      // window.location.href = url.href;
-    });
+  const sort_select = document.querySelector("[sort-select]");
+  const clear_sort = document.querySelector("[clear-sort]");
+  sort_select.addEventListener("change", (e) => {
+    const [valueKey, value] = e.target.value.split("-");
+    url.searchParams.set("valueKey", valueKey);
+    url.searchParams.set("value", value);
+
+    window.location.href = url.href;
   });
+  const sortkey = url.searchParams.get("valueKey");
+  const sort = url.searchParams.get("value");
+  if (sortkey && sort) {
+    const stringSort = `${sortkey}-${sort}`;
+    const optionSelect = sort_select.querySelector(
+      `option[value='${stringSort}']`,
+    );
+    console.log(optionSelect);
+    optionSelect.selected = true;
+  }
 }
-//END sort product
