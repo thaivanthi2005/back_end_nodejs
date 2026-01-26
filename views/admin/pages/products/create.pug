@@ -23,10 +23,11 @@ block main
     .form-group
       label(for="desc") Mô tả
       textarea.form-control(
-        id="desc"
+        id="my-expressjs-tinymce-app"
         name="description"
         rows="5"
-      )
+      )= product.description
+
 
     //- Giá
     .form-group

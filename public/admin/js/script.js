@@ -180,4 +180,7 @@ if (sort) {
     console.log(optionSelect);
     optionSelect.selected = true;
   }
+  clear_sort.addEventListener("click", () => {
+    window.location.href = `${window.location.origin}${window.location.pathname}`;
+  });
 }

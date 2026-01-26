@@ -14,7 +14,7 @@ block main
     // Thông tin sản phẩm
     .product-info
       h1= product.title
-      p.description= product.description
+      p.description !{product.description}
 
       // Giá
       if product.discountPercentage > 0
