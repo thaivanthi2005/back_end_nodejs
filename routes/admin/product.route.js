@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const fileUpload = multer();
 const middleware = require("../../middleware/upload.middleware");
+const middleware_validate = require("../../middleware/validate.middleware");
 const controller = require("../../controller/admin/product.controller");
 router.get("/", controller.index);
 router.patch("/change-status/:status/:id", controller.changeStatus);
@@ -14,6 +15,7 @@ router.post(
   "/create",
   fileUpload.single("thumbnail"),
   middleware.upload_images,
+  middleware_validate.validate,
   controller.create_products_post,
 );
 
@@ -22,6 +24,7 @@ router.patch(
   "/edit/:id",
   fileUpload.single("thumbnail"),
   middleware.upload_images,
+  middleware_validate.validate,
   controller.edit_products_patch,
 );
 router.get("/detail/:id", controller.detail_products);

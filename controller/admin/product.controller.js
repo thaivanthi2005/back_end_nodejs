@@ -107,33 +107,6 @@ module.exports.create_products = async (req, res) => {
 //[POST] /create
 
 module.exports.create_products_post = async (req, res) => {
-  console.log(req.body);
-  if (!req.body.title) {
-    req.session.success = ["VUI LÒNG NHẬP VÀO TIÊU ĐỀ !!!!"];
-    res.redirect(req.get("referer"));
-    return;
-  }
-
-  if (!req.body.description) {
-    req.session.success = ["VUI LÒNG NHẬP VÀO MIÊU TẢ!!!!"];
-    res.redirect(req.get("referer"));
-    return;
-  }
-  if (!parseInt(req.body.price)) {
-    req.session.success = ["VUI LÒNG NHẬP VÀO GIÁ!!!!"];
-    res.redirect(req.get("referer"));
-    return;
-  }
-  if (!parseInt(req.body.discountPercentage)) {
-    req.session.success = ["VUI LÒNG NHẬP VÀO GIẢM GIÁ!!!!"];
-    res.redirect(req.get("referer"));
-    return;
-  }
-  if (!parseInt(req.body.stock)) {
-    req.session.success = ["VUI LÒNG NHẬP VÀO sỐ lƯỢNG!!!!"];
-    res.redirect(req.get("referer"));
-    return;
-  }
   req.body.price = parseInt(req.body.price);
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
