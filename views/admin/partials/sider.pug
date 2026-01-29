@@ -1,7 +1,9 @@
 .sider
-    .inner-menu
-        ul
-            li
-                a(href=`${prefixAdmin}/dashboard`) Tổng quan
-            li
-                a(href=`${prefixAdmin}/products`) Sản Phẩm
+  .inner-menu
+    ul
+      li(class=page === "dashboard" ? "active" : "")
+        a(href=`${prefixAdmin}/dashboard`) Tổng quan
+      li(class=page === "products" ? "active" : "")
+        a(href=`${prefixAdmin}/products`) Sản Phẩm
+      li(class=page === "category" ? "active" : "")
+        a(href=`${prefixAdmin}/category`) Danh Mục Sản Phẩm
