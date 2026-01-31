@@ -2,3 +2,21 @@ extends ../../layouts/default.pug
 
 block main 
     h1 DANH MỤC SẢN PHẨM
+
+    .categories
+        .category
+            a(href=`${prefixAdmin}/category/create`) Thêm danh mục
+
+
+//- _id
+//- title
+//- parent_id (id của danh mục cha, null nếu là danh mục gốc)
+//- description 
+//- thumbanil 
+//- status 
+//- position 
+//- deleted 
+//- deletedAt 
+//- createAt 
+//- updateAt
+//- slug
