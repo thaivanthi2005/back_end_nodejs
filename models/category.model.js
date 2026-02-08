@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 slug = require("mongoose-slug-updater");
 mongoose.plugin(slug);
 
-const product_schema = new mongoose.Schema(
+const product_schema_category = new mongoose.Schema(
   {
     title: String,
-    paren_id: {
+    parent_id: {
       type: String,
       default: "",
     },
@@ -29,5 +29,9 @@ const product_schema = new mongoose.Schema(
     timestamps: true,
   },
 );
-const Product = mongoose.model("Product", product_schema, "category");
-module.exports = Product;
+const Product1 = mongoose.model(
+  "Product_category",
+  product_schema_category,
+  "category",
+);
+module.exports = Product1;

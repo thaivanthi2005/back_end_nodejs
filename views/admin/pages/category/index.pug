@@ -1,11 +1,14 @@
 extends ../../layouts/default.pug
+include ../../mixins/category-tree.pug
 
-block main 
-    h1 DANH MỤC SẢN PHẨM
+block main
+  h1 DANH MỤC SẢN PHẨM
 
-    .categories
-        .category
-            a(href=`${prefixAdmin}/category/create`) Thêm danh mục
+  .categories
+    +categoryTree(products)
+
+  .add-category
+    a(href=`${prefixAdmin}/category/create`) ➕ Thêm danh mục
 
 
 //- _id

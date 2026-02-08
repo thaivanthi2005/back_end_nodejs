@@ -1,0 +1,6 @@
+mixin categoryOptions(categories, level = 0)
+  each category in categories
+    option(value=category._id)
+      | #{'-- '.repeat(level)}#{category.title}
+    if category.children && category.children.length
+      +categoryOptions(category.children, level + 1)

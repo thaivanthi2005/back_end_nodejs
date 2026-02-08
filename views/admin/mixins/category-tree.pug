@@ -1,0 +1,24 @@
+mixin categoryTree(categories)
+  ul.category-list
+    each category in categories
+      li.category-item
+        .category-header
+          span.toggle-btn(
+            data-toggle
+          ) ▶
+          span.category-title #{category.title}
+
+          .actions
+            a(
+              href=`${prefixAdmin}/category/${category._id}/edit`
+              onclick="event.stopPropagation()"
+            ) Sửa
+            |  
+            a(
+              href=`${prefixAdmin}/category/${category._id}/delete`
+              onclick="event.stopPropagation()"
+            ) Xóa
+
+        if category.children && category.children.length
+          .category-children.hidden
+            +categoryTree(category.children)

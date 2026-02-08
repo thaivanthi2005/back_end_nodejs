@@ -1,5 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/category-option.pug
+
 block main
   h1.mb-4 Thêm mới danh mục sản phẩm
   +alert-error(success, error)
@@ -26,9 +28,8 @@ block main
         id="parent_id"
         name="parent_id"
       )
-        //- option(value="") -- Chọn danh mục cha --
-        //- each category in categories
-        //-   option(value=category._id) #{category.title}
+        option(value="") -- Chọn danh mục cha --
+        +categoryOptions(products)
     //- Mô tả
     .form-group
       label(for="my-expressjs-tinymce-app") Mô tả

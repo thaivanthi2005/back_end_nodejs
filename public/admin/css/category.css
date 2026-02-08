@@ -1,0 +1,28 @@
+.category-list {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.category-item {
+  margin-bottom: 8px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  font-size: 12px;
+  user-select: none;
+}
+
+.category-children {
+  margin-left: 20px;
+}
+
+.hidden {
+  display: none;
+}
