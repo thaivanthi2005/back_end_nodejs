@@ -1,6 +1,7 @@
-mixin categoryOptions(categories, level = 0)
+mixin categoryOptions(categories, selectedParentId, level = 0)
   each category in categories
-    option(value=category._id)
-      | #{'-- '.repeat(level)}#{category.title}
+    - const catId = category._id.toString()
+    - const isSelected = selectedParentId && catId === selectedParentId.toString()
+    option(value=catId selected=isSelected ? true : false) #{'-- '.repeat(level)}#{category.title}
     if category.children && category.children.length
-      +categoryOptions(category.children, level + 1)
+      +categoryOptions(category.children, selectedParentId, level + 1)

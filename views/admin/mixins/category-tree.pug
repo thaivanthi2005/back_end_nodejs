@@ -10,12 +10,12 @@ mixin categoryTree(categories)
 
           .actions
             a(
-              href=`${prefixAdmin}/category/${category._id}/edit`
+              href=`${prefixAdmin}/category/edit/${category._id}`
               onclick="event.stopPropagation()"
             ) Sửa
             |  
             a(
-              href=`${prefixAdmin}/category/${category._id}/delete`
+              href=`${prefixAdmin}/category/delete/${category._id}`
               onclick="event.stopPropagation()"
             ) Xóa
 

@@ -1,4 +1,5 @@
 const Product1 = require("../../models/category.model");
+const system_config = require("../../config/system");
 
 module.exports.category = async (req, res) => {
   const categories = await Product1.find().lean();
@@ -36,9 +37,6 @@ function createTree(arr, parentId = "") {
 module.exports.category_create = async (req, res) => {
   const categories = await Product1.find().lean();
   const categoryTree = createTree(categories, "");
-
-  console.log(JSON.stringify(categoryTree, null, 2));
-
   res.render("admin/pages/category/create", {
     pagetitle: "Tạo danh mục sản phẩm",
     products: categoryTree,
@@ -52,3 +50,41 @@ module.exports.category_create_post = async (req, res) => {
 };
 
 // --------------------END-Create--------------------------------
+
+//[GET] _-------------------------- Edit -----------------------------
+module.exports.category_edit = async (req, res) => {
+  let find = {
+    _id: req.params.id,
+    delete: false,
+  };
+  const categories = await Product1.find().lean();
+  const categoryTree = createTree(categories, "");
+  const products = await Product1.findOne(find);
+  res.render("admin/pages/category/edit", {
+    pagetitle: "Sửa danh mục sản phẩm",
+    products: products,
+    product_category: categoryTree,
+  });
+};
+// [GET]_--------------------------END Edit -----------------------------
+
+module.exports.category_edit_patch = async (req, res) => {
+  console.log(req.body);
+  const id = req.params._id;
+  const updateData = {
+    title: req.body.title,
+    parent_id: req.body.parent_id,
+    description: req.body.description,
+    position: req.body.position,
+    status: req.body.status,
+  };
+  if (req.file) {
+    updateData.thumbnail = req.body.thumbnail;
+  }
+  try {
+    await Product1.updateOne({ _id: id }, updateData);
+    res.redirect(`${system_config.prefixAdmin}/products`);
+  } catch (error) {
+    res.redirect(`${system_config.prefixAdmin}/products`);
+  }
+};
