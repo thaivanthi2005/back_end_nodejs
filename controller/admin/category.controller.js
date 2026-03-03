@@ -69,8 +69,9 @@ module.exports.category_edit = async (req, res) => {
 // [GET]_--------------------------END Edit -----------------------------
 
 module.exports.category_edit_patch = async (req, res) => {
-  console.log(req.body);
-  const id = req.params._id;
+  console.log(req);
+  const id = req.params.id;
+  console.log(id);
   const updateData = {
     title: req.body.title,
     parent_id: req.body.parent_id,
@@ -83,8 +84,8 @@ module.exports.category_edit_patch = async (req, res) => {
   }
   try {
     await Product1.updateOne({ _id: id }, updateData);
-    res.redirect(`${system_config.prefixAdmin}/products`);
+    res.redirect(`${system_config.prefixAdmin}/category`);
   } catch (error) {
-    res.redirect(`${system_config.prefixAdmin}/products`);
+    res.redirect(`${system_config.prefixAdmin}/product`);
   }
 };
