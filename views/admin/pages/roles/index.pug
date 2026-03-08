@@ -1,0 +1,7 @@
+extends ../../layouts/default.pug
+include ../../mixins/category-tree.pug
+
+block main
+  h1 Nhóm quyền
+  .add-category
+    a(href=`${prefixAdmin}/roles/create`) ➕ Thêm nhóm quyền
