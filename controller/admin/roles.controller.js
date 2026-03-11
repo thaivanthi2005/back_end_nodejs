@@ -2,8 +2,13 @@ const Product = require("../../models/roles.model");
 const system_config = require("../../config/system");
 
 module.exports.index = async (req, res) => {
+  let find = {
+    delete: false,
+  };
+  const products = await Product.find(find);
   res.render("admin/pages/roles/index", {
     pagetitle: "Nhóm Quyền",
+    products: products,
   });
 };
 

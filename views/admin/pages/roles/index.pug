@@ -5,3 +5,26 @@ block main
   h1 Nhóm quyền
   .add-category
     a(href=`${prefixAdmin}/roles/create`) ➕ Thêm nhóm quyền
+  table(class="table table-hover table-sm"
+                checkbox-multi)
+    thead.thead-dark
+      tr
+        th.text-center STT
+        th.text-center Tiêu đề
+        th.text-center Mô tả
+        th.text-center Hành động
+    tbody
+      each val,index in products
+        tr
+          td.text-center #{index + 1}
+          td.text-center #{val.title}
+          td.text-center
+            .tinymce-content !{val.description}
+          td.text-center
+            a(href=`${prefixAdmin}/roles/${val.id}/edit`) ✏️ Sửa
+            form(
+              action=`${prefixAdmin}/roles/${val.id}?_method=DELETE`
+              method="POST"
+              style="display: inline-block;"
+            )
+              button(type="submit" onclick="return confirm('Bạn có chắc muốn xóa nhóm quyền này?')") 🗑️ Xóa
