@@ -27,3 +27,30 @@ module.exports.create_post = async (req, res) => {
   res.redirect(`${system_config.prefixAdmin}/roles`);
 };
 // [POST] ------ ENd Create roles ------
+
+//[GET] ----------- EDIT ROLES --------------
+module.exports.edit_roles = async (req, res) => {
+  console.log(req.params.id);
+  let find = {
+    delete: false,
+    _id: req.params.id,
+  };
+  const products = await Product.findOne(find);
+  res.render("admin/pages/roles/edit", {
+    pagetitle: "Sửa Nhóm Quyền",
+    products: products,
+  });
+};
+//[GET] ----------- END EDIT ROLES --------------
+
+//[PATCH] ----------- EDIT ROLES --------------
+module.exports.edit_roles_patch = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Product.updateOne({ _id: id }, req.body);
+    res.redirect(`${system_config.prefixAdmin}/roles`);
+  } catch (error) {
+    res.redirect(`${system_config.prefixAdmin}/products`);
+  }
+};
+//[PATCH] ----------- END EDIT ROLES --------------

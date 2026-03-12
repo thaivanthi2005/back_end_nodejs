@@ -21,7 +21,7 @@ block main
           td.text-center
             .tinymce-content !{val.description}
           td.text-center
-            a(href=`${prefixAdmin}/roles/${val.id}/edit`) ✏️ Sửa
+            a(href=`${prefixAdmin}/roles/edit/${val.id}`) ✏️ Sửa
             form(
               action=`${prefixAdmin}/roles/${val.id}?_method=DELETE`
               method="POST"

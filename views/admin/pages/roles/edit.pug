@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main
+  h1.mb-4 Sửa nhóm quyền
+  +alert-error(success, error)
+  form(
+    action=`${prefixAdmin}/roles/edit/${products.id}?_method=PATCH`
+    method="POST"
+    enctype="multipart/form-data"
+    id="form-edit-roles"
+  )
+
+    //- Tiêu đề
+    .form-group
+      label(for="title") Tiêu đề
+      input.form-control(
+        type="text"
+        id="title"
+        name="title"
+        value=products.title
+      )
+
+    //- Mô tả
+    .form-group
+      label(for="my-expressjs-tinymce-app") Mô tả
+      textarea.form-control(
+        id="my-expressjs-tinymce-app"
+        name="description"
+        rows="5")= products.description
+    //- Submit
+
+    .form-group
+      button.btn.btn-primary(type="submit") Chỉnh sửa nhóm quyền
