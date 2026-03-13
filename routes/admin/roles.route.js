@@ -14,4 +14,6 @@ router.patch(
   fileUpload.single("thumbnail"),
   controller.edit_roles_patch,
 );
+router.delete("/delete/:id", controller.delete_roles);
+router.get("/permissions", controller.permissions);
 module.exports = router;

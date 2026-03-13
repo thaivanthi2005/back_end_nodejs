@@ -23,7 +23,7 @@ block main
           td.text-center
             a(href=`${prefixAdmin}/roles/edit/${val.id}`) ✏️ Sửa
             form(
-              action=`${prefixAdmin}/roles/${val.id}?_method=DELETE`
+              action=`${prefixAdmin}/roles/delete/${val.id}?_method=DELETE`
               method="POST"
               style="display: inline-block;"
             )

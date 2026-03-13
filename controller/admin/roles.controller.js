@@ -54,3 +54,26 @@ module.exports.edit_roles_patch = async (req, res) => {
   }
 };
 //[PATCH] ----------- END EDIT ROLES --------------
+
+//[DELETE] ----------- DELETE ROLES --------------
+module.exports.delete_roles = async (req, res) => {
+  const id = req.params.id;
+
+  // await Product.deleteOne({ _id: id });
+  await Product.updateOne({ _id: id }, { delete: true, deletedAt: new Date() });
+  req.session.success = ["CẬP NHẬT THÀNH CÔNG"];
+
+  res.redirect(req.get("referer"));
+};
+//[DELETE] ----------- DELETE ROLES --------------
+
+//[GET] ----------- permissions --------------
+module.exports.permissions = async (req, res) => {
+  const roles = await Product.find({ delete: false });
+  res.render("admin/pages/roles/permissions", {
+    pagetitle: "Phân Quyền",
+    roles: roles,
+  });
+};
+
+//[GET] ----------- END permissions --------------
