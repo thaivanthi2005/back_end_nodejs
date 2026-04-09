@@ -75,5 +75,20 @@ module.exports.permissions = async (req, res) => {
     roles: roles,
   });
 };
-
 //[GET] ----------- END permissions --------------
+
+//[PATCH] -----------permissions --------------
+
+module.exports.permissions_patch = async (req, res) => {
+  const ar = JSON.parse(req.body.permissions);
+  for (const item of ar) {
+    await Product.updateOne(
+      { _id: item.id },
+      { permissions: item.permissions },
+    );
+  }
+  req.session.success = ["CẬP NHẬT THÀNH CÔNG"];
+  res.redirect(req.get("referer"));
+};
+
+//[PATCH] -----------End permissions --------------
