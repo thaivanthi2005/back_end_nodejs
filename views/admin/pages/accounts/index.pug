@@ -1,30 +1,59 @@
 extends ../../layouts/default.pug
-include ../../mixins/category-tree.pug
 
 block main
-  h1 Tài Khoản
-  .add-category
-    a(href=`${prefixAdmin}/accounts/create`) ➕ Thêm Tài Khoản
-//-   table(class="table table-hover table-sm"
-//-                 checkbox-multi)
-//-     thead.thead-dark
-//-       tr
-//-         th.text-center STT
-//-         th.text-center Tiêu đề
-//-         th.text-center Mô tả
-//-         th.text-center Hành động
-//-     tbody
-//-       each val,index in products
-//-         tr
-//-           td.text-center #{index + 1}
-//-           td.text-center #{val.title}
-//-           td.text-center
-//-             .tinymce-content !{val.description}
-//-           td.text-center
-//-             a(href=`${prefixAdmin}/roles/edit/${val.id}`) ✏️ Sửa
-//-             form(
-//-               action=`${prefixAdmin}/roles/delete/${val.id}?_method=DELETE`
-//-               method="POST"
-//-               style="display: inline-block;"
-//-             )
-//-               button(type="submit" onclick="return confirm('Bạn có chắc muốn xóa nhóm quyền này?')") 🗑️ Xóa
+  h1 Danh sách tài khoản
+
+  table.table.table-hover.table-sm(checkbox-multi)
+    thead.thead-dark
+      tr
+        th
+          input(type="checkbox", name="checkall")
+        th.text-center STT
+        th.text-center Avatar
+        th.text-center Họ tên
+        th.text-center Email
+        th.text-center SĐT
+        th.text-center Trạng thái
+        th.text-center Hành động #{accounts}
+
+    tbody
+      each val, index in (accounts || [])
+        tr
+          td
+            input(
+              type="checkbox",
+              name="id",
+              value=val._id
+            )
+
+          td.text-center #{index + 1}
+
+          td.text-center
+            if val.avatar
+              img.img-thumbnail(src=val.avatar, width="60")
+            else
+              span.text-muted Không có
+
+          td #{val.fullName}
+          td #{val.email}
+          td.text-center #{val.phone || "-"}
+
+          td.text-center
+            if val.status == "active"
+              span.badge.badge-success Hoạt động
+            else
+              span.badge.badge-danger Dừng hoạt động
+
+          td.text-center
+            a.btn.btn-warning.btn-sm(
+              href=`${prefixAdmin}/accounts/edit/${val._id}`
+            ) Sửa
+
+            a.btn.btn-info.btn-sm.ml-1(
+              href=`${prefixAdmin}/accounts/detail/${val._id}`
+            ) Chi tiết
+
+            button.btn.btn-danger.btn-sm.ml-1(
+              data-id=val._id
+              button-delete
+            ) Xóa

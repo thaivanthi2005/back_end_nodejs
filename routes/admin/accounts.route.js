@@ -7,5 +7,10 @@ const fileUpload = multer();
 
 router.get("/", controller.accounts);
 router.get("/create", controller.create);
-router.post("/create", controller.create_post);
+router.post(
+  "/create",
+  fileUpload.single("thumbnail"),
+  middleware.upload_images,
+  controller.create_post,
+);
 module.exports = router;
