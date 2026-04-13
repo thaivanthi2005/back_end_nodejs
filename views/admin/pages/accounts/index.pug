@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 
 block main
   h1 Danh sách tài khoản
-
+  a(href=`${prefixAdmin}/accounts/create`) ➕ Thêm Tài Khoản
   table.table.table-hover.table-sm(checkbox-multi)
     thead.thead-dark
       tr
@@ -14,7 +14,7 @@ block main
         th.text-center Email
         th.text-center SĐT
         th.text-center Trạng thái
-        th.text-center Hành động #{accounts}
+        th.text-center Hành động
 
     tbody
       each val, index in (accounts || [])

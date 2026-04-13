@@ -5,7 +5,7 @@ var md5 = require("md5");
 
 module.exports.accounts = async (req, res) => {
   let find = {
-    delete: false,
+    deleted: false,
   };
   const account = await accounts.find(find);
   res.render("admin/pages/accounts/index", {
