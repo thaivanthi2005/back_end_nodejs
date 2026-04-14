@@ -13,4 +13,12 @@ router.post(
   middleware.upload_images,
   controller.create_post,
 );
+router.get("/detail/:id", controller.detail);
+router.get("/edit/:id", controller.edit);
+router.patch(
+  "/edit/:id",
+  fileUpload.single("thumbnail"),
+  middleware.upload_images,
+  controller.edit_patch,
+);
 module.exports = router;

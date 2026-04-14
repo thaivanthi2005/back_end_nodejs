@@ -78,8 +78,8 @@ block main
     .form-group
       label(for="role") Phân quyền
       select.form-control(
-        id="role"
-        name="role"
+        id="role_id"
+        name="role_id"
       )
         each role in roles
           option(value=role._id) #{role.title}
@@ -110,3 +110,4 @@ block main
     //- Submit
     .form-group.mt-3
       button.btn.btn-primary(type="submit") Tạo mới
+    

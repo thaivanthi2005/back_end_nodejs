@@ -1,0 +1,62 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  .account
+
+    .account-image 
+      if account.avatar && account.avatar !== ""
+        img(
+          src=account.avatar,
+          alt=account.fullName,
+          style="width:150px; height:150px; object-fit:cover; border-radius:50%;"
+        )
+      else
+        img(
+          src="https://via.placeholder.com/150?text=Avatar",
+          alt="No Avatar",
+          style="border-radius:50%;"
+        )
+
+      br
+
+      if account.status == "active"
+        span.badge.badge-success Hoạt động
+      else
+        span.badge.badge-danger Dừng hoạt động
+
+    // Thông tin
+    .account-info.mt-3
+      h2= account.fullName
+
+      p
+        strong Email:
+        |  #{account.email}
+
+      p
+        strong SĐT:
+        |  #{account.phone || "Không có"}
+
+      p
+        strong ID:
+        |  #{account._id}
+
+      if account.createdAt
+        p
+          strong Ngày tạo:
+          |  #{new Date(account.createdAt).toLocaleString()}
+
+      if account.updatedAt
+        p
+          strong Cập nhật:
+          |  #{new Date(account.updatedAt).toLocaleString()}
+
+      // Nút
+      .mt-3
+        a.btn.btn-warning(
+          href=`${prefixAdmin}/accounts/edit/${account._id}`
+        ) Sửa
+
+        a.btn.btn-secondary.ml-2(
+          href=`${prefixAdmin}/accounts`
+        ) Quay lại
