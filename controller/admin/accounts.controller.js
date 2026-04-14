@@ -64,5 +64,9 @@ module.exports.edit = async (req, res) => {
 
 // -------- PATCH edit -------
 module.exports.edit_patch = async (req, res) => {
-  res.send(req.body);
+  let find = {
+    _id: req.params.id,
+  };
+  await accounts.findOne(find).updateOne(req.body);
+  res.redirect(`${system_config.prefixAdmin}/accounts`);
 };

@@ -1,0 +1,125 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  h1.mb-4 Chỉnh sửa tài khoản
+
+  +alert-error(success, error)
+
+  form(
+    action=`${prefixAdmin}/accounts/edit/${account._id}?_method=PATCH`
+    method="POST"
+    enctype="multipart/form-data"
+  )
+
+    //- Họ tên
+    .form-group
+      label(for="fullName") Họ tên *
+      input.form-control(
+        type="text"
+        id="fullName"
+        name="fullName"
+        value=account.fullName
+        required
+      )
+
+    //- Email
+    .form-group
+      label(for="email") Email *
+      input.form-control(
+        type="email"
+        id="email"
+        name="email"
+        value=account.email
+        required
+      )
+
+    //- Mật khẩu (không bắt buộc)
+    .form-group
+      label(for="password") Mật khẩu mới
+      input.form-control(
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Không nhập nếu không đổi"
+      )
+
+    //- SĐT
+    .form-group
+      label(for="phone") Số điện thoại
+      input.form-control(
+        type="text"
+        id="phone"
+        name="phone"
+        value=account.phone
+      )
+
+    //- Avatar
+    .form-group(upload-image)
+      label Avatar
+      input.form-control-file(
+        type="file"
+        name="avatar"
+        accept="image/*"
+        upload-image-input
+      )
+
+      br
+
+      if account.avatar
+        img(
+          src=account.avatar,
+          width="120",
+          upload-image-preview
+        )
+      else
+        img(
+          src="https://via.placeholder.com/120?text=Avatar",
+          width="120",
+          upload-image-preview
+        )
+
+      br
+      button.btn.btn-secondary(
+        type="button"
+        upload-image-delete
+      ) Xóa ảnh
+
+    //- Phân quyền
+    .form-group
+      label(for="role") Phân quyền
+      select.form-control(
+        id="role_id"
+        name="role_id"
+      )
+        each role in roles
+            option(
+                value=role._id
+                selected=role._id.toString() === account.role_id.toString()
+            ) #{role.title}
+    //- Trạng thái
+    .form-group
+      label Trạng thái
+
+      .form-check.form-check-inline
+        input.form-check-input(
+          type="radio"
+          name="status"
+          value="active"
+          checked=account.status=="active"
+        )
+        label.form-check-label Hoạt động
+
+      .form-check.form-check-inline
+        input.form-check-input(
+          type="radio"
+          name="status"
+          value="inactive"
+          checked=account.status=="inactive"
+        )
+        label.form-check-label Dừng hoạt động
+
+    //- Submit
+    .form-group.mt-3
+      button.btn.btn-primary(type="submit") Cập nhật
+      a.btn.btn-secondary.ml-2(href=`${prefixAdmin}/accounts`) Quay lại
