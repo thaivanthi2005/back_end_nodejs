@@ -1,25 +1,19 @@
 mixin alert(success, error)
-    if success.length
-        div(
-            class="alert alert-success"
-            show-alert
-            data-time = "5000"
-        )
-            = success[0]
+  if success && success.length
+    .alert.alert-success.show.fade(role="alert")
+      = success[0]
 
-    if error.length
-        .alert.alert-danger
-            = error[0]
+  if error && error.length
+    .alert.alert-danger.show.fade(role="alert")
+      = error[0]
 
-mixin alert-error(success, error)
-    if success.length
-        div(
-            class="alert alert-danger"
-            show-alert
-            data-time = "5000"
-        )
-            = success[0]
-
-    if error.length
-        .alert.alert-danger
-            = error[0]
+  // Auto hide sau 5s
+  script.
+    setTimeout(() => {
+      const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(alert => {
+        alert.classList.remove('show');
+        alert.classList.add('hide');
+        setTimeout(() => alert.remove(), 500);
+      });
+    }, 5000);

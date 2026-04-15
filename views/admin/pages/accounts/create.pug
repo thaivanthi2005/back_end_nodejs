@@ -4,7 +4,8 @@ include ../../mixins/alert.pug
 block main
   h1.mb-4 Thêm mới tài khoản
 
-  +alert-error(success, error)
+    +alert(success, error)
+
 
   form(
     action=`${prefixAdmin}/accounts/create`
