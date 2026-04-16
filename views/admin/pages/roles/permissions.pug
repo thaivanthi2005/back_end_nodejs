@@ -3,11 +3,10 @@ include ../../mixins/category-tree.pug
 include ../../mixins/alert.pug
 block main
 
-  +alert-error(success, error)
+  +alert(success, error)
   h1(class="mb-4") Phân quyền
 
   if(roles)
-    div(data-roles=roles) kkk
     div(class="text-right")
       button(
         type="submit"

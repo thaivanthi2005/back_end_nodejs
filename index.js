@@ -5,7 +5,7 @@ const session = require("express-session");
 var path = require("path");
 require("dotenv").config();
 const app = express();
-
+const cookieParser = require("cookie-parser");
 const route = require("./routes/client/index.route");
 const route_admin = require("./routes/admin/index.route");
 const database = require("./config/database");
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
-
+app.use(cookieParser());
 app.use(
   "/tinymce",
   express.static(path.join(__dirname, "node_modules", "tinymce")),
