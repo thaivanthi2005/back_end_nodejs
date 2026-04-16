@@ -31,8 +31,14 @@ module.exports.auth_login_post = async (req, res) => {
         req.session.error = ["Tài Khoản Không còn hoạt động !"];
         res.redirect(req.get("referer"));
       } else {
+        res.cookie("token", user.token);
         res.redirect(`${system_config.prefixAdmin}/dashboard`);
       }
     }
   }
+};
+
+module.exports.auth_logout = (req, res) => {
+  res.clearCookie("token");
+  res.redirect(`${system_config.prefixAdmin}/auth/login`);
 };
