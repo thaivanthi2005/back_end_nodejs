@@ -13,11 +13,11 @@ mixin categoryTree(categories)
               href=`${prefixAdmin}/category/edit/${category._id}`
               onclick="event.stopPropagation()"
             ) Sửa
-            |  
-            a(
-              href=`${prefixAdmin}/category/delete/${category._id}`
-              onclick="event.stopPropagation()"
-            ) Xóa
+            if(roles.permissions.includes("products-category_delete"))
+              a(
+                href=`${prefixAdmin}/category/delete/${category._id}`
+                onclick="event.stopPropagation()"
+              ) Xóa
 
         if category.children && category.children.length
           .category-children.hidden
