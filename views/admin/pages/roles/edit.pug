@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
   h1.mb-4 Sửa nhóm quyền
-  +alert-error(success, error)
+  +alert(success, error)
   form(
     action=`${prefixAdmin}/roles/edit/${products.id}?_method=PATCH`
     method="POST"

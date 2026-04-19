@@ -46,8 +46,10 @@ if (tablePermissions) {
 
 //Permissions default
 const data_roles = document.querySelector("[data-roles]");
+console.log(data_roles);
 if (data_roles) {
   const data = JSON.parse(data_roles.getAttribute("data-roles"));
+  console.log(data);
   data.forEach((item, index) => {
     const permissions = item.permissions;
     permissions.forEach((permissions) => {
@@ -55,6 +57,7 @@ if (data_roles) {
         `[data-name="${permissions}"]`,
       );
       const input = row.querySelectorAll("input")[index];
+
       input.checked = true;
     });
   });

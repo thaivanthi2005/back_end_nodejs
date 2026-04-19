@@ -92,7 +92,7 @@ block main
         id="role_id"
         name="role_id"
       )
-        each role in roles
+        each role in roles1
             option(
                 value=role._id
                 selected=role._id.toString() === account.role_id.toString()

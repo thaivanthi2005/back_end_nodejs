@@ -58,7 +58,7 @@ module.exports.edit = async (req, res) => {
   res.render("admin/pages/accounts/edit", {
     account: account,
     pagetitle: "Cập nhật tài khoản",
-    roles: role,
+    roles1: role,
   });
 };
 
