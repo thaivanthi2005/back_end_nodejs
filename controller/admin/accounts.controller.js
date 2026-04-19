@@ -67,6 +67,7 @@ module.exports.edit_patch = async (req, res) => {
   let find = {
     _id: req.params.id,
   };
+  req.body.password = md5(req.body.password);
   await accounts.findOne(find).updateOne(req.body);
   res.redirect(`${system_config.prefixAdmin}/accounts`);
 };

@@ -12,17 +12,22 @@ module.exports.auth_middleware = async (req, res, next) => {
         deleted: false,
       })
       .select("-password");
+    res.locals.user = user;
+    res.locals.roles = await roles.findOne({
+      _id: user.role_id,
+      delete: false,
+    });
     if (!user) {
       res.redirect(`${system_config.prefixAdmin}/auth/logout`);
     } else {
       if (user.status == "inactive") {
         res.redirect(`${system_config.prefixAdmin}/auth/logout`);
       } else {
-        res.locals.user = user;
-        res.locals.roles = await roles.findOne({
+        const roles1 = await roles.findOne({
           _id: user.role_id,
           delete: false,
         });
+        ///console.log(roles1);
         next();
       }
     }

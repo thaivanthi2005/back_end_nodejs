@@ -70,9 +70,10 @@ module.exports.delete_roles = async (req, res) => {
 //[GET] ----------- permissions --------------
 module.exports.permissions = async (req, res) => {
   const roles = await Product.find({ delete: false });
+
   res.render("admin/pages/roles/permissions", {
     pagetitle: "Phân Quyền",
-    roles: roles,
+    roles1: roles,
   });
 };
 //[GET] ----------- END permissions --------------
