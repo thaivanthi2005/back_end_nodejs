@@ -46,7 +46,9 @@ block main
                                 th.text-center Giá
                                 th.text-center Vị trí
                                 th.text-center Trạng thái
+                                th.text-center Người tạo
                                 th.text-center Hành động
+                                
                         tbody
                             each val,index in products
                                 tr
@@ -84,6 +86,11 @@ block main
                                             data-id = val.id
                                             button-change-status
                                             class="badge badge-danger") Hết hàng
+                                    td.text-center
+                                        if val.createdBy.account_id && val.createdBy.createdAt
+                                            |#{val.createdBy.account_id} - #{moment(parseInt(val.createdBy.createdAt)).format('DD/MM/YYYY')}
+                                        else
+                                            |Chưa có dữ liệu                                    
                                     td.text-center
                                         a(class="btn btn-warning btn-sm"
                                         href = `${prefixAdmin}/products/edit/${val.id}`

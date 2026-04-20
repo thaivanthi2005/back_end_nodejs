@@ -22,10 +22,12 @@ block main
             td.text-center
               .tinymce-content !{val.description}
             td.text-center
-              a(href=`${prefixAdmin}/roles/edit/${val.id}`) ✏️ Sửa
-              form(
-                action=`${prefixAdmin}/roles/delete/${val.id}?_method=DELETE`
-                method="POST"
-                style="display: inline-block;"
-              )
-                button(type="submit" onclick="return confirm('Bạn có chắc muốn xóa nhóm quyền này?')") 🗑️ Xóa
+              if(roles.permissions.includes("roles_edit"))
+                a(href=`${prefixAdmin}/roles/edit/${val.id}`) ✏️ Sửa
+              if(roles.permissions.includes("roles_delete"))
+                form(
+                  action=`${prefixAdmin}/roles/delete/${val.id}?_method=DELETE`
+                  method="POST"
+                  style="display: inline-block;"
+                )
+                  button(type="submit" onclick="return confirm('Bạn có chắc muốn xóa nhóm quyền này?')") 🗑️ Xóa

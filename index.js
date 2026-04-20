@@ -25,6 +25,7 @@ app.use(
 );
 app.use(express.static(`${__dirname}/public`));
 app.locals.prefixAdmin = system_config.prefixAdmin;
+app.locals.moment = require("moment");
 //flash
 // ===== SESSION =====
 app.use(

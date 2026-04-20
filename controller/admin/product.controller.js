@@ -117,7 +117,11 @@ module.exports.create_products_post = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
+  req.body.createdBy = {
+    account_id: res.locals.user.role_id,
+  };
   const product = new Product(req.body);
+
   await product.save();
   res.redirect(`${system_config.prefixAdmin}/products`);
 };

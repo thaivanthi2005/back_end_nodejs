@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 block main
   if(roles.permissions.includes("products_edit"))
     h1.mb-4 Sửa sản phẩm
-    +alert-error(success, error)
+    +alert(success, error)
     form(
       action=`${prefixAdmin}/products/edit/${products.id}?_method=PATCH`
       method="POST"
