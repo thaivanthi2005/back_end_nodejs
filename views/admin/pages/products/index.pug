@@ -88,7 +88,7 @@ block main
                                             class="badge badge-danger") Hết hàng
                                     td.text-center
                                         if val.createdBy.account_id && val.createdBy.createdAt
-                                            |#{val.createdBy.account_id} - #{moment(parseInt(val.createdBy.createdAt)).format('DD/MM/YYYY')}
+                                            |#{accounts.fullName} - #{moment(parseInt(val.createdBy.createdAt)).format('DD/MM/YYYY')}
                                         else
                                             |Chưa có dữ liệu                                    
                                     td.text-center

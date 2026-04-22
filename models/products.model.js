@@ -29,8 +29,15 @@ const product_schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-
-  deletedAt: Date,
+  deletedBy: {
+    account_id: {
+      type: String,
+    },
+    deletedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
   position: Number,
 });
 const Product = mongoose.model("Product", product_schema, "project1");

@@ -3,6 +3,7 @@ const filterStatusHelper = require("../../helper/filterstatus");
 const searchHelper = require("../../helper/search");
 const paginatonHelper = require("../../helper/pagination");
 const system_config = require("../../config/system");
+const accounts = require("../../models/accounts.model");
 //[GET] /admin/products
 module.exports.index = async (req, res) => {
   // console.log(req.query);
@@ -35,13 +36,17 @@ module.exports.index = async (req, res) => {
     })
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
-
+  let find_acc = {
+    role_id: res.locals.user.role_id,
+  };
+  const acc = await accounts.findOne(find_acc);
   res.render("admin/pages/products/index", {
     pagetitle: "Trang sản phẩm",
     products: products2,
     category: filterStatus,
     keyword: objectSearch.keyword,
     pagination: objectPagination,
+    accounts: acc,
   });
 };
 //[PATH] /change-status/:status/:id
@@ -69,7 +74,13 @@ module.exports.changeMulti = async (req, res) => {
     case "delete-all":
       await Product.updateMany(
         { _id: { $in: ids } },
-        { delete: true, deletedAt: new Date() },
+        {
+          delete: true,
+          deletedBy: {
+            account_id: res.locals.user.role_id,
+            deletedAt: new Date(),
+          },
+        },
       );
       break;
     case "change-position":
@@ -88,9 +99,17 @@ module.exports.changeMulti = async (req, res) => {
 //[DELETE] /delete/:id
 module.exports.deleteItem = async (req, res) => {
   const id = req.params.id;
-
   // await Product.deleteOne({ _id: id });
-  await Product.updateOne({ _id: id }, { delete: true, deletedAt: new Date() });
+  await Product.updateOne(
+    { _id: id },
+    {
+      delete: true,
+      deletedBy: {
+        account_id: res.locals.user.role_id,
+        deletedAt: new Date(),
+      },
+    },
+  );
   req.session.success = ["CẬP NHẬT THÀNH CÔNG"];
 
   res.redirect(req.get("referer"));
