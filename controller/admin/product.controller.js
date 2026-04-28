@@ -184,7 +184,14 @@ module.exports.edit_products_patch = async (req, res) => {
     updateData.thumbnail = req.body.thumbnail;
   }
   try {
-    await Product.updateOne({ _id: id }, updateData);
+    const updatedBy_con = {
+      account_id: res.locals.user.role_id,
+      updatedAt: new Date(),
+    };
+    await Product.updateOne(
+      { _id: id },
+      { updateData, $push: { updatedBy: updatedBy_con } },
+    );
     res.redirect(`${system_config.prefixAdmin}/products`);
   } catch (error) {
     res.redirect(`${system_config.prefixAdmin}/products`);
