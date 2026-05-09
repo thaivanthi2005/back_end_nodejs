@@ -16,6 +16,11 @@ const product_schema = new mongoose.Schema({
     slug: "title",
     unique: true,
   },
+
+  delete: {
+    type: Boolean,
+    default: false,
+  },
   createdBy: {
     account_id: {
       type: String,
@@ -24,10 +29,6 @@ const product_schema = new mongoose.Schema({
       type: String,
       default: Date.now,
     },
-  },
-  delete: {
-    type: Boolean,
-    default: false,
   },
   deletedBy: {
     account_id: {

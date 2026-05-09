@@ -5,3 +5,7 @@ header.header
         .inner-logo
           a(href="/admin/dashboard") ADMIN
       .col-9
+        div(class="text-right")
+          a(href="/admin/my-account" class="btn btn-sm btn-primary") #{user.fullName}
+          a(href="/admin/auth/logout" class="btn btn-sm btn-danger ml-2") Logout
+          
