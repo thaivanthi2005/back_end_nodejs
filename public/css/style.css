@@ -24,6 +24,89 @@
   margin-left: 20px;
 }
 
+/* ===== DROPDOWN MENU ===== */
+
+/* Container li có sub-menu */
+li.sub-menu {
+  position: relative;
+}
+
+/* Ẩn sub-menu mặc định */
+li.sub-menu > ul.sub-menu-list,
+li.sub-menu .sub-menu-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  min-width: 220px;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* Hiện sub-menu khi hover */
+li.sub-menu:hover > ul.sub-menu-list {
+  display: block;
+}
+
+/* Hiện sub-menu khi click (dùng class active thêm bằng JS) */
+li.sub-menu.active > ul.sub-menu-list {
+  display: block;
+}
+
+/* Style từng item trong menu */
+.sub-menu-list li {
+  position: relative;
+}
+
+.sub-menu-list li a {
+  display: block;
+  padding: 10px 18px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.sub-menu-list li a:hover {
+  background-color: #f5f5f5;
+  color: #e74c3c; /* đổi màu brand của bạn */
+}
+
+/* ===== SUB-MENU LỒNG NHAU (đệ quy) ===== */
+.sub-menu-list li > ul.sub-menu-list {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #fff;
+  min-width: 200px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.sub-menu-list li:hover > ul.sub-menu-list {
+  display: block;
+}
+
+/* Mũi tên chỉ có con */
+.sub-menu-list li:has(> ul.sub-menu-list) > a::after {
+  content: "›";
+  float: right;
+  margin-left: 8px;
+  color: #aaa;
+}
+
 /* end header */
 
 .footer {
