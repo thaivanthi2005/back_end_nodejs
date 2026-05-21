@@ -26,7 +26,7 @@ function createTree(arr, parentId = "") {
 module.exports.categoryMiddleware = async (req, res, next) => {
   const categories = await Category.find().lean();
   const categoryTree = createTree(categories, "");
-  console.log(categoryTree);
+  // console.log(categoryTree);
   res.locals.layoutcategory = categoryTree;
   //   console.log("chạy qua ổn");
   next();

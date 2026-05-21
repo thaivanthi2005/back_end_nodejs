@@ -170,10 +170,15 @@ module.exports.edit_products_patch = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
+  req.body.createdBy = {
+    account_id: res.locals.user.role_id,
+  };
+
   const updateData = {
     title: req.body.title,
     description: req.body.description,
     price: req.body.price,
+    featured: req.body.featured,
     discountPercentage: req.body.discountPercentage,
     stock: req.body.stock,
     position: req.body.position,
@@ -190,20 +195,23 @@ module.exports.edit_products_patch = async (req, res) => {
     };
     await Product.updateOne(
       { _id: id },
-      { updateData, $push: { updatedBy: updatedBy_con } },
+      {
+        $set: updateData,
+        $push: { updatedBy: updatedBy_con },
+      },
     );
     res.redirect(`${system_config.prefixAdmin}/products`);
   } catch (error) {
-    res.redirect(`${system_config.prefixAdmin}/products`);
+    res.redirect(`${system_config.prefixAdmin}/dashboard`);
   }
 };
 
 //[GET] /admin/products/detail/:id
 
 module.exports.detail_products = async (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   const product = await Product.findOne({ _id: req.params.id });
-  console.log(product);
+  // console.log(product);
   res.render("admin/pages/products/detail", {
     product: product,
   });

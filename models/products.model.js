@@ -10,6 +10,7 @@ const product_schema = new mongoose.Schema({
   stock: Number,
   thumbnail: String,
   status: String,
+  featured: String,
   rating: Number,
   slug: {
     type: String,

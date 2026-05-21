@@ -28,7 +28,27 @@ block main
           id="my-expressjs-tinymce-app"
           name="description"
           rows="5")= products.description
+      //- Nổi bật
+      .form-group
+        .form-check.form-check-inline
+          input.form-check-input(
+            type="radio"
+            id="featuredActive"
+            name="featured"
+            value="1"
+            checked = true ? products.featured == '1' : false
+          )
+          label.form-check-label(for="featuredActive") Nổi bật
 
+        .form-check.form-check-inline
+          input.form-check-input(
+            type="radio"
+            id="featuredInactive"
+            name="featured"
+            value="0"
+            checked = true ? products.featured == '0' : false
+          )
+          label.form-check-label(for="featuredInactive") Không nổi bật
 
       //- Giá
       .form-group
