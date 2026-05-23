@@ -1,6 +1,19 @@
 extends ../../layouts/default.pug
 
 block main 
-      h1 TRANG CHỦ
+      .container.my-3
+            h1 TRANG CHỦ
 
-      
+            .row
+                  each item in products.filter(p => p.featured)
+                        .col-3.mb-3
+                              .product-item
+                                    a(href=`/products/${item.slug}`)
+                                          .inner-image 
+                                                img(src=item.thumbnail, alt=item.title)
+                                          .inner-content
+                                                h3.inner-title #{item.title}
+                                                .inner-price-new #{item.pricenew}đ
+                                                .inner-price-old #{item.price}đ
+                                                .inner-discount -#{item.discountPercentage}%
+                                                .inner-featured Nổi bật

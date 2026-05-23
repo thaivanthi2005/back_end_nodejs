@@ -7,12 +7,11 @@ module.exports.products = async (req, res) => {
   }).sort({ position: "desc" });
   const newProduct = products2.map((item) => {
     item.pricenew = (
-      (item.price * (100 - item.discoutprecentage)) /
+      (item.price * (100 - item.discountPercentage)) /
       100
     ).toFixed(0);
     return item;
   });
-
   res.render("client/pages/products/index", {
     pagetitle: "Danh sách sản phẩm",
     products: newProduct,
