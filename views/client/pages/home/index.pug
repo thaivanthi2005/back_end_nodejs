@@ -3,9 +3,9 @@ extends ../../layouts/default.pug
 block main 
       .container.my-3
             h1 TRANG CHỦ
-
+            h2 Sản phẩm nổi bật
             .row
-                  each item in products.filter(p => p.featured)
+                  each item in product_featured
                         .col-3.mb-3
                               .product-item
                                     a(href=`/products/${item.slug}`)
@@ -17,3 +17,16 @@ block main
                                                 .inner-price-old #{item.price}đ
                                                 .inner-discount -#{item.discountPercentage}%
                                                 .inner-featured Nổi bật
+            h2 Sản phẩm mới
+            .row
+                  each item in product_new
+                        .col-3.mb-3
+                              .product-item
+                                    a(href=`/products/${item.slug}`)
+                                          .inner-image 
+                                                img(src=item.thumbnail, alt=item.title)
+                                          .inner-content
+                                                h3.inner-title #{item.title}
+                                                .inner-price-new #{item.pricenew}đ
+                                                .inner-price-old #{item.price}đ
+                                                .inner-discount -#{item.discountPercentage}%
