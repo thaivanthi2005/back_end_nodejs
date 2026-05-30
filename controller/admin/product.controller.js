@@ -177,6 +177,7 @@ module.exports.edit_products_patch = async (req, res) => {
   const updateData = {
     title: req.body.title,
     description: req.body.description,
+    product_category_id: req.body.product_category_id,
     price: req.body.price,
     featured: req.body.featured,
     discountPercentage: req.body.discountPercentage,
@@ -184,7 +185,7 @@ module.exports.edit_products_patch = async (req, res) => {
     position: req.body.position,
     status: req.body.status,
   };
-
+  console.log(req.body);
   if (req.file) {
     updateData.thumbnail = req.body.thumbnail;
   }
