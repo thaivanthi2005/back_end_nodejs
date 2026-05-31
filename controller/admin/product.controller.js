@@ -185,7 +185,6 @@ module.exports.edit_products_patch = async (req, res) => {
     position: req.body.position,
     status: req.body.status,
   };
-  console.log(req.body);
   if (req.file) {
     updateData.thumbnail = req.body.thumbnail;
   }

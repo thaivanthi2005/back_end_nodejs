@@ -1,11 +1,11 @@
-mixin subMenu(layoutcategory, pathProduct)
+mixin subMenu(layoutcategory)
     if layoutcategory.length > 0
         ul.sub-menu-list
             each item in layoutcategory
                 li
-                    a(href=pathProduct + "/" + item.slug) #{item.title}
+                    a(href="/products/" + item.slug) #{item.title}
                     if item.children && item.children.length > 0
-                        +subMenu(item.children, pathProduct + "/" + item.slug)
+                        +subMenu(item.children)
 //- mixin categoryTree(categories)
 //-   ul.category-list
 //-     each category in categories
