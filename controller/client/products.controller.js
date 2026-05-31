@@ -52,3 +52,17 @@ module.exports.slug_category = async (req, res) => {
     products: newProduct,
   });
 };
+
+// [GET] /:id
+module.exports.product_detail = async (req, res) => {
+  const products2 = await Product.findOne({
+    status: "InStock",
+    delete: false,
+    _id: req.params.id,
+  }).sort({ position: "desc" });
+  console.log(products2);
+  res.render("client/pages/products/detail", {
+    pagetitle: "Chi Tiết Sản Phẩm",
+    product: products2,
+  });
+};

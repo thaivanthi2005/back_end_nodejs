@@ -8,7 +8,7 @@ block main
                   each item in product_featured
                         .col-3.mb-3
                               .product-item
-                                    a(href=`/products/${item.slug}`)
+                                    a(href=`/products/${item.id}`)
                                           .inner-image 
                                                 img(src=item.thumbnail, alt=item.title)
                                           .inner-content
@@ -22,7 +22,7 @@ block main
                   each item in product_new
                         .col-3.mb-3
                               .product-item
-                                    a(href=`/products/${item.slug}`)
+                                    a(href=`/products/${item.id}`)
                                           .inner-image 
                                                 img(src=item.thumbnail, alt=item.title)
                                           .inner-content
