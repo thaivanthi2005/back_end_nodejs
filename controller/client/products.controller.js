@@ -1,4 +1,3 @@
-//[GET] /products
 const Product = require("../../models/products.model");
 const Category = require("../../models/category.model");
 //[GET] products
@@ -60,7 +59,6 @@ module.exports.product_detail = async (req, res) => {
     delete: false,
     _id: req.params.id,
   }).sort({ position: "desc" });
-  console.log(products2);
   res.render("client/pages/products/detail", {
     pagetitle: "Chi Tiết Sản Phẩm",
     product: products2,
