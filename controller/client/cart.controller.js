@@ -1,8 +1,43 @@
 const Product = require("../../models/products.model");
 const Category = require("../../models/category.model");
+const Cart = require("../../models/cart.model");
 //[POST] /add/:productId"
 module.exports.addcart = async (req, res) => {
-  console.log(req.params.productId);
-  console.log(req.body.quantity);
-  res.send("oke");
+  const cartId = req.cookies.cartId;
+  const product_id = req.params.productId;
+  const quantity = parseInt(req.body.quantity);
+  const cart = await Cart.findOne({
+    _id: cartId,
+  });
+  if (cart) {
+    const existProductInCart = cart.products.find(
+      (item) => item.product_id == product_id,
+    );
+    if (existProductInCart) {
+      const quantityNew = quantity + existProductInCart.quantity;
+      await Cart.updateOne(
+        {
+          _id: cartId,
+          "products.product_id": product_id,
+        },
+        {
+          $set: {
+            "products.$.quantity": quantityNew,
+          },
+        },
+      );
+    } else {
+      const objectCart = {
+        product_id: product_id,
+        quantity: quantity,
+      };
+      await Cart.updateOne(
+        { _id: cartId },
+        { $push: { products: objectCart } },
+      );
+    }
+  }
+
+  req.session.success = ["Thêm Giỏ Hàng Thành Công"];
+  res.redirect(req.get("referer"));
 };
