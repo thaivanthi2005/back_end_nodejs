@@ -1,30 +1,31 @@
 include ../mixins/subMenu
+
 header.header
-    .container
-        .row.align-items-center
-            .col-3
-                .inner-logo 
-                    a(href="/")
-                        img(src="/images/logo (1).svg", alt="Logo")
-            .col-5
-                form(action="/search" method="GET")
-                    .form-group.d-flex.mb-0
-                        input(
-                            type="text"
-                            placeholder="Nhập từ khóa..."
-                            class="form-control"
-                            name="keyword"
-                        )
-                        button(
-                            type="submit"
-                            class="btn btn-primary"
-                        ) Tìm
-            .col-4
-                .inner-menu 
-                    ul 
-                        li
-                            a(href="/") TRANG CHỦ
-                        li.sub-menu
-                            - const pathProduct = "/products"
-                            a(href=pathProduct) SẢN PHẨM
-                                +subMenu(layoutcategory)
+    .header-inner
+        .header-logo
+            a(href="/")
+                img(src="/images/logo (1).svg", alt="Logo")
+        .header-search
+            form(action="/search" method="GET")
+                .search-wrap
+                    input(
+                        type="text"
+                        placeholder="Nhập từ khóa..."
+                        class="search-input"
+                        name="keyword"
+                    )
+                    button(type="submit" class="search-btn") Tìm
+        .header-nav
+            .inner-menu 
+                ul 
+                    li
+                        a(href="/") TRANG CHỦ
+                    li.sub-menu
+                        - const pathProduct = "/products"
+                        a(href=pathProduct) SẢN PHẨM
+                            +subMenu(layoutcategory)
+                    li
+                        a.cart-link(href="/cart")
+                            i.fas.fa-shopping-cart
+                            span GIỎ HÀNG
+                            span.cart-badge #{total_quantity}
