@@ -1,6 +1,7 @@
 const Product = require("../../models/products.model");
 const Category = require("../../models/category.model");
 const Cart = require("../../models/cart.model");
+
 //[POST] /add/:productId"
 module.exports.addcart = async (req, res) => {
   const cartId = req.cookies.cartId;
@@ -40,4 +41,36 @@ module.exports.addcart = async (req, res) => {
 
   req.session.success = ["Thêm Giỏ Hàng Thành Công"];
   res.redirect(req.get("referer"));
+};
+
+// [GET] /cart
+module.exports.index = async (req, res) => {
+  const cart = await Cart.findOne({
+    _id: req.cookies.cartId,
+  });
+
+  let productInfoList = [];
+
+  if (cart.products.length > 0) {
+    for (const item of cart.products) {
+      const productInfo = await Product.findOne({
+        _id: item.product_id,
+      });
+      if (productInfo) {
+        productInfoList.push({
+          ...productInfo._doc,
+          quantity: item.quantity,
+          pricenew: (
+            (productInfo.price * (100 - productInfo.discountPercentage)) /
+            100
+          ).toFixed(0), // thêm giá mới
+        });
+      }
+    }
+  }
+
+  res.render("client/pages/cart/index", {
+    pagetitle: "Giỏ Hàng",
+    productInfo: productInfoList,
+  });
 };
