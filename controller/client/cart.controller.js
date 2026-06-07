@@ -74,3 +74,16 @@ module.exports.index = async (req, res) => {
     productInfo: productInfoList,
   });
 };
+
+// [GET] /delete/:id
+module.exports.delete_products = async (req, res) => {
+  await Cart.updateOne(
+    { _id: req.cookies.cartId },
+    {
+      $pull: {
+        products: { product_id: req.params.id },
+      },
+    },
+  );
+  res.redirect(`/cart`);
+};
