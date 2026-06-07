@@ -85,5 +85,26 @@ module.exports.delete_products = async (req, res) => {
       },
     },
   );
+  req.session.success = ["Xóa Sản Phẩm Giỏ Hàng Thành Công"];
+  res.redirect(`/cart`);
+};
+
+//[GET] /update/:productId/:quantity
+module.exports.update_quantity = async (req, res) => {
+  const cartId = req.cookies.cartId;
+  const product_id = req.params.productId;
+  const quantity = parseInt(req.params.quantity);
+  await Cart.updateOne(
+    {
+      _id: cartId,
+      "products.product_id": product_id,
+    },
+    {
+      $set: {
+        "products.$.quantity": quantity,
+      },
+    },
+  );
+  req.session.success = ["Cập Nhật Số Lượng  Giỏ Hàng Thành Công"];
   res.redirect(`/cart`);
 };
