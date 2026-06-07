@@ -29,7 +29,7 @@ block main
                   td
                     img(src=item.thumbnail style="width: 80px")
                   td
-                    a(href=`/products/detail/${item.slug}`)= item.title
+                    a(href=`/products/detail/${item._id}`)= item.title
                   td
                     del= item.price + ' VNĐ'
                     |  → 
