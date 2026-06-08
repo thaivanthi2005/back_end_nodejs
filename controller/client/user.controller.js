@@ -2,6 +2,8 @@ const Product = require("../../models/products.model");
 const Category = require("../../models/category.model");
 const Cart = require("../../models/cart.model");
 const User = require("../../models/user.model");
+const ForgotPassword = require("../../models/forgot-password");
+const generateHelper = require("../../helper/generate");
 var md5 = require("md5");
 
 //[GET] /user/register
@@ -66,4 +68,37 @@ module.exports.loginPost = async (req, res) => {
 module.exports.logout = async (req, res) => {
   res.clearCookie("tokenUser");
   res.redirect(req.get("referer"));
+};
+
+// [GET] /password/forgot
+module.exports.forgotPassword = async (req, res) => {
+  res.render("client/pages/user/forgot-password", {
+    pagetitle: "Quên mật khẩu",
+  });
+};
+// [POST] /password/forgot
+
+module.exports.forgotPasswordPost = async (req, res) => {
+  const email = req.body.email;
+
+  const user = await User.findOne({
+    email: email,
+    deleted: false,
+  });
+  if (!user) {
+    req.session.error = ["EMAIL KO TỒN TẠI"];
+    res.redirect(req.get("referer"));
+    return;
+  }
+  const otp = generateHelper.generateRandomNumber(8);
+  const objectForgotPassword = {
+    email: email,
+    otp: otp,
+    expiresAt: Date.now(),
+  };
+  // console.log(objectForgotPassword);
+  const forgotPassword = new ForgotPassword(objectForgotPassword);
+  await forgotPassword.save();
+  //Nếu tồn tại email thì gửi mã OTP qua email (viết sau)
+  res.send("ple");
 };
