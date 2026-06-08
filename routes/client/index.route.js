@@ -6,27 +6,16 @@ const search_route = require("./search.route");
 const cart_route = require("./cart.route");
 const checkout_route = require("./checkout.route");
 const user_route = require("./user.route");
+const middleware_user = require("../../middleware/client/user.middleware");
+
 module.exports = (app) => {
-  // ✅ Thêm cart_middleware vào tất cả route dùng header
-  app.use(
-    "/",
-    Middleware.categoryMiddleware,
-    cart_middleware.checkcart,
-    home_router,
-  );
-  app.use(
-    "/products",
-    Middleware.categoryMiddleware,
-    cart_middleware.checkcart,
-    products_router,
-  );
-  app.use(
-    "/search",
-    Middleware.categoryMiddleware,
-    cart_middleware.checkcart,
-    search_route,
-  );
-  app.use("/cart", cart_middleware.checkcart, cart_route);
-  app.use("/checkout", cart_middleware.checkcart, checkout_route);
+  app.use(Middleware.categoryMiddleware);
+  app.use(cart_middleware.checkcart);
+  app.use(middleware_user.infoUser);
+  app.use("/", home_router);
+  app.use("/products", products_router);
+  app.use("/search", search_route);
+  app.use("/cart", cart_route);
+  app.use("/checkout", checkout_route);
   app.use("/user", user_route);
 };
