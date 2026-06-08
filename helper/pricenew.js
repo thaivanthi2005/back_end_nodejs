@@ -8,3 +8,10 @@ module.exports.pricenew = (product) => {
   });
   return newProduct;
 };
+
+// Cho single product (dùng ở checkout)
+module.exports.pricenewSingle = (product) => {
+  return ((product.price * (100 - product.discountPercentage)) / 100).toFixed(
+    0,
+  );
+};
