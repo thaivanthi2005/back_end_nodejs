@@ -31,6 +31,8 @@ header.header
                             span.cart-badge #{total_quantity}
                     if(user)
                         li
+                            a(href='/user/info') #{user.fullName}
+                        li
                             a(href='/user/logout') ĐĂNG XUẤT
                     else
                         li

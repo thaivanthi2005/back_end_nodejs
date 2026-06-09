@@ -7,7 +7,6 @@ const cart_route = require("./cart.route");
 const checkout_route = require("./checkout.route");
 const user_route = require("./user.route");
 const middleware_user = require("../../middleware/client/user.middleware");
-
 module.exports = (app) => {
   app.use(Middleware.categoryMiddleware);
   app.use(cart_middleware.checkcart);

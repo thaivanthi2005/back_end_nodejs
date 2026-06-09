@@ -1,0 +1,19 @@
+extends  ../../layouts/default.pug
+include ../../mixins/box-head.pug
+block main 
+      .container.my-3 
+            .row
+                  .col-12 
+                        .box-head 
+                           +box-head(pagetitle)
+                        .box-body 
+                              .row
+                                    .col-12 
+                                          .card.mb-3
+                                                .card-body
+                                                      .row
+                                                            .col-4.text-center
+                                                                  img(src=user.avatar alt="avatar" class="rounded-circle" width="150")
+                                                            .col-8
+                                                                  h5 #{user.name}
+                                                                  p #{user.email}

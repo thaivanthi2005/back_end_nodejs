@@ -161,3 +161,10 @@ module.exports.resetPasswordPost = async (req, res) => {
   );
   res.redirect("/");
 };
+
+//[GET]  /user/info
+module.exports.info = async (req, res) => {
+  res.render("client/pages/user/info", {
+    pagetitle: "THONG TIN TAI KHOAN ",
+  });
+};
