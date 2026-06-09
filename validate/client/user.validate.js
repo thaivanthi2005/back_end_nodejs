@@ -34,3 +34,17 @@ module.exports.loginPost = (req, res, next) => {
 
   next();
 };
+
+module.exports.restPassword = (req, res, next) => {
+  if (!req.body.password || !req.body.confirmPassword) {
+    req.session.error = ["VUI LONG NHAP DAY DU !"];
+    res.redirect(req.get("referer"));
+    return;
+  }
+  if (req.body.password != req.body.confirmPassword) {
+    req.session.error = ["MẬT KHẨU KHÔNG TRÙNG KHỚP"];
+    res.redirect(req.get("referer"));
+    return;
+  }
+  next();
+};
