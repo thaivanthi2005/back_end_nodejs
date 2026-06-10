@@ -36,7 +36,7 @@ module.exports.indexLogin = async (req, res) => {
     pagetitle: "Đăng Nhập",
   });
 };
-// [POST] /user/register
+// [POST] /user/loginpost
 module.exports.loginPost = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -60,7 +60,14 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
   res.cookie("tokenUser", user.tokenUser);
-
+  await Cart.updateOne(
+    {
+      _id: req.cookies.cartId,
+    },
+    {
+      user_id: user.id,
+    },
+  );
   res.redirect(`/`);
 };
 
