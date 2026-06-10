@@ -7,6 +7,7 @@ const accounts_route = require("../admin/accounts.route");
 const auth_route = require("../admin/auth.route");
 const my_account = require("../admin/my-account.route");
 const middleware = require("../../middleware/auth.middleware");
+const settings = require("../admin/settings.route");
 const { accounts } = require("../../controller/admin/accounts.controller");
 
 module.exports = (app) => {
@@ -22,4 +23,5 @@ module.exports = (app) => {
   app.use(PATH_ADMIN + "/accounts", middleware.auth_middleware, accounts_route);
   app.use(PATH_ADMIN + "/auth", auth_route);
   app.use(PATH_ADMIN + "/my-account", middleware.auth_middleware, my_account);
+  app.use(PATH_ADMIN + "/settings", middleware.auth_middleware, settings);
 };
