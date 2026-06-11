@@ -1,5 +1,4 @@
 extends ../../layouts/default.pug
-
 include ../../mixins/alert.pug
 
 block main
@@ -8,7 +7,7 @@ block main
   +alert(success, error)
 
   form(
-    action=`/${prefixAdmin}/settings/general?_method=PATCH`
+    action=`${prefixAdmin}/settings/general?_method=PATCH`
     method="POST"
     enctype="multipart/form-data"
   )
@@ -19,6 +18,7 @@ block main
         class="form-control"
         id="websiteName"
         name="websiteName"
+        value=(settings.websiteName ? settings.websiteName : '')
       )
 
     div(
@@ -31,6 +31,14 @@ block main
         class="form-control-file"
         id="logo"
         name="logo"
+        accept="image/*"
+        upload-image-input
+      )
+      img(
+        src=(settings.logo ? settings.logo : '')
+        alt="Logo"
+        class="img-thumbnail mt-2"
+        upload-image-preview
       )
 
     div(class="form-group")
@@ -40,6 +48,7 @@ block main
         class="form-control"
         id="phone"
         name="phone"
+        value=(settings.phone ? settings.phone : '')
       )
 
     div(class="form-group")
@@ -49,6 +58,7 @@ block main
         class="form-control"
         id="email"
         name="email"
+        value=(settings.email ? settings.email : '')
       )
 
     div(class="form-group")
@@ -58,6 +68,7 @@ block main
         class="form-control"
         id="address"
         name="address"
+        value=(settings.address ? settings.address : '')
       )
 
     div(class="form-group")
@@ -67,6 +78,7 @@ block main
         class="form-control"
         id="copyright"
         name="copyright"
+        value=(settings.copyright ? settings.copyright : '')
       )
 
     div(class="form-group")

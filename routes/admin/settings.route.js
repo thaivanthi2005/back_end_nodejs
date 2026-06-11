@@ -6,5 +6,10 @@ const multer = require("multer");
 const fileUpload = multer();
 
 router.get("/general", controller.index);
-
+router.patch(
+  "/general",
+  fileUpload.single("logo"),
+  middleware.upload_images,
+  controller.settingGeneralPOST,
+);
 module.exports = router;

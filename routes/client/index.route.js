@@ -8,10 +8,12 @@ const checkout_route = require("./checkout.route");
 const user_route = require("./user.route");
 const middleware_user = require("../../middleware/client/user.middleware");
 const middleware_auth = require("../../middleware/client/auth.middleware");
+const middleware_settings = require("../../middleware/client/settings.middlware");
 module.exports = (app) => {
   app.use(Middleware.categoryMiddleware);
   app.use(cart_middleware.checkcart);
   app.use(middleware_user.infoUser);
+  app.use(middleware_settings.settingGeneral);
   app.use("/", home_router);
   app.use("/products", products_router);
   app.use("/search", search_route);
