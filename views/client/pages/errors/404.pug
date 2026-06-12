@@ -1,0 +1,158 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title #{pagetitle}
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css")
+    style.
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f5f5f3;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .page-404 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 2rem;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e8e8e6;
+        max-width: 480px;
+        width: 90%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-404::before,
+      .page-404::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.07;
+        filter: blur(60px);
+      }
+
+      .page-404::before {
+        width: 280px;
+        height: 280px;
+        background: #534AB7;
+        top: -80px;
+        right: -60px;
+      }
+
+      .page-404::after {
+        width: 240px;
+        height: 240px;
+        background: #1D9E75;
+        bottom: -60px;
+        left: -40px;
+      }
+
+      .icon-wrap {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #f5f4fe;
+        border: 1px solid #e0ddfb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .icon-wrap .ti {
+        font-size: 32px;
+        color: #534AB7;
+      }
+
+      .error-code {
+        font-size: 96px;
+        font-weight: 500;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #534AB7, #1D9E75);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        z-index: 1;
+      }
+
+      .divider-line {
+        width: 48px;
+        height: 3px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, #534AB7, #1D9E75);
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .error-title {
+        font-size: 22px;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .error-desc {
+        font-size: 15px;
+        color: #6b6b6b;
+        line-height: 1.7;
+        max-width: 340px;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 24px;
+        border-radius: 8px;
+        background: #534AB7;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.15s, transform 0.1s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-home:hover { opacity: 0.85; }
+      .btn-home:active { transform: scale(0.97); }
+      .btn-home .ti { font-size: 16px; }
+
+  body
+    .page-404
+      .icon-wrap
+        i.ti.ti-map-search(aria-hidden="true")
+
+      h1.error-code 404
+      .divider-line
+
+      h2.error-title Trang không tìm thấy
+      p.error-desc
+        | Rất tiếc, trang bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.
+        br
+        | Vui lòng kiểm tra lại đường dẫn.
+
+      a.btn-home(href="/")
+        i.ti.ti-home(aria-hidden="true")
+        | Quay lại trang chủ

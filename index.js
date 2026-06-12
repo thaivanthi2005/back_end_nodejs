@@ -54,7 +54,11 @@ route(app);
 route_admin(app);
 
 database.connect();
-
+app.get("/{*path}", (req, res) => {
+  res.status(404).render("client/pages/errors/404", {
+    pagetitle: "404 Not Found",
+  });
+});
 app.listen(port, () => {
   console.log("kết nối oke");
 });
