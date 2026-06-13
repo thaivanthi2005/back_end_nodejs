@@ -5,6 +5,8 @@ const session = require("express-session");
 var path = require("path");
 require("dotenv").config();
 const app = express();
+const http = require("http");
+const server = http.createServer(app);
 const cookieParser = require("cookie-parser");
 const route = require("./routes/client/index.route");
 const route_admin = require("./routes/admin/index.route");
@@ -15,6 +17,14 @@ const system_config = require("./config/system");
 app.use(methodOverride("_method"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// SocketIO
+const { Server } = require("socket.io");
+const io = new Server(server);
+io.on("connection", (socket) => {
+  console.log("a user connected", socket.id);
+});
+// End SocketIO
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
@@ -59,6 +69,6 @@ app.get("/{*path}", (req, res) => {
     pagetitle: "404 Not Found",
   });
 });
-app.listen(port, () => {
+server.listen(port, () => {
   console.log("kết nối oke");
 });
