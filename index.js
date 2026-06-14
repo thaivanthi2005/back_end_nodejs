@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // SocketIO
 const { Server } = require("socket.io");
 const io = new Server(server);
-global.test = io;
+global._io = io;
 // End SocketIO
 
 app.set("views", `${__dirname}/views`);
