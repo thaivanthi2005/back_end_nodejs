@@ -1100,3 +1100,15 @@ h1.text-center {
 .chat .inner-foot button i {
   font-size: 18px;
 }
+
+/* EMOJI ICON */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
+}
+/* END EMOJI ICON */
