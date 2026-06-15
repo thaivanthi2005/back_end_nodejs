@@ -17,8 +17,13 @@ block main
             div(class=(chat.user_id == user.id ? 'inner-outgoing' : 'inner-incoming'))
               if(chat.userId !== user.id)
                 .inner-name #{chat.infoUser.fullName}
-              .inner-content
-                | #{chat.content}
+              if(chat.content)
+                .inner-content
+                  | #{chat.content}
+              if(chat.images)
+                .inner-images
+                  each image in chat.images
+                    img(src=image)
           div(class="inner-list-typing")
         .inner-foot
           form.inner-form(action="")
@@ -34,4 +39,5 @@ block main
                   emoji-picker
             button
                 i.fa-solid.fa-paper-plane
+            div(class="custom-file-container" data-upload-id="my-unique-id")
           

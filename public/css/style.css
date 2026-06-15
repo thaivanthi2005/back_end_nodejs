@@ -1100,7 +1100,32 @@ h1.text-center {
 .chat .inner-foot button i {
   font-size: 18px;
 }
+.inner-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  max-width: 300px;
+}
 
+.inner-images img {
+  width: calc(50% - 4px);
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.inner-images img:hover {
+  opacity: 0.85;
+}
+
+/* Nếu chỉ có 1 ảnh thì hiện to hơn */
+.inner-images img:only-child {
+  width: 100%;
+  max-width: 250px;
+}
 /* EMOJI ICON */
 .tooltip {
   visibility: hidden;
