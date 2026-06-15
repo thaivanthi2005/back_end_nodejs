@@ -16,16 +16,25 @@ module.exports.index = async (req, res) => {
       });
       await chat.save();
 
-      //Trả data về client
+      // Trả data về client
       _io.emit("SERVER_RETURN_MESSAGE", {
         fullName: fullName,
         userId: user_id,
         content: content,
       });
     });
+    //TYPING
+    socket.on("CLIENT_SENT_TYPING", async (type) => {
+      socket.broadcast.emit("SERVER-RETURN-TYPING", {
+        fullName: fullName,
+        userId: user_id,
+        type: type,
+      });
+    });
+    //END TYPING
   });
-
-  //Lay data từ database
+  // END SocketIo
+  // Lay data từ database
   const chats = await Chat.find({
     deleted: false,
   });
@@ -35,7 +44,6 @@ module.exports.index = async (req, res) => {
     }).select("fullName");
     chat.infoUser = infoUser;
   }
-  // End SocketIo
   res.render("client/pages/chat/index", {
     pagetitle: "Chat",
     chats: chats,
