@@ -16,11 +16,12 @@ if (formSendData) {
     const content = e.target.elements.content.value;
     const images = upload.cachedFileArray;
     console.log(images);
-    if (content || images.length() > 0) {
+    if (content || images.length > 0) {
       socket.emit("CLIENT_SEND_MESSAGE", {
         content: content,
         images: images,
       });
+      upload.resetPreviewPanel();
       e.target.elements.content.value = "";
       socket.emit("CLIENT_SENT_TYPING", "hidden");
     }
