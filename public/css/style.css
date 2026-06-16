@@ -1219,3 +1219,50 @@ h1.text-center {
   }
 }
 /* End Box Typing */
+
+/* NOT FRIEND */
+.box-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.inner-avatar img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.inner-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inner-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827; /* thêm dòng này */
+}
+
+.inner-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 576px) {
+  .box-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+/* END NOT FRIEND */
