@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const controller = require("../../controller/client/user.controller");
 const validate = require("../../validate/client/user.validate");
 const middleware_auth = require("../../middleware/client/auth.middleware");
+const fileUpload = multer();
+const avatar_middleware = require("../../middleware/upload.middleware");
 
 router.get("/register", controller.indexRegister);
 router.post("/register", validate.registerPost, controller.registerPost);
@@ -20,4 +23,11 @@ router.post(
   controller.resetPasswordPost,
 );
 router.get("/info", middleware_auth.auth_middleware, controller.info);
+router.post(
+  "/info/update",
+  fileUpload.single("avatar"),
+  avatar_middleware.upload_images,
+  middleware_auth.auth_middleware,
+  controller.info_update,
+);
 module.exports = router;

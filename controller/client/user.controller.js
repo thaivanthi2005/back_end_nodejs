@@ -166,7 +166,7 @@ module.exports.resetPassword = async (req, res) => {
 //[GET]  /user/password/reset
 module.exports.resetPasswordPost = async (req, res) => {
   const password = req.body.password;
-  const tokenUser = req.cookie.tokenUser;
+  const tokenUser = req.cookies.tokenUser;
   await User.updateOne(
     { tokenUser: tokenUser },
     {
@@ -181,4 +181,10 @@ module.exports.info = async (req, res) => {
   res.render("client/pages/user/info", {
     pagetitle: "THONG TIN TAI KHOAN ",
   });
+};
+//[POST]  /user/info/update
+module.exports.info_update = async (req, res) => {
+  const tokenUser = req.cookies.tokenUser;
+  await User.updateOne({ tokenUser: tokenUser }, req.body);
+  res.redirect("/user/info");
 };

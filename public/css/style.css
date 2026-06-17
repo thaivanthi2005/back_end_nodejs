@@ -1249,13 +1249,25 @@ h1.text-center {
 .inner-name {
   font-size: 18px;
   font-weight: 500;
-  color: #111827; /* thêm dòng này */
+  color: #111827;
 }
 
-.inner-actions {
+.inner-buttons {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.box-user [btn-cancel-friend] {
+  display: none;
+}
+
+.box-user.add [btn-add-friend] {
+  display: none;
+}
+
+.box-user.add [btn-cancel-friend] {
+  display: inline-block;
 }
 
 @media (max-width: 576px) {
