@@ -5,13 +5,26 @@ const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password");
 const generateHelper = require("../../helper/generate");
 const sendMailHelper = require("../../helper/sendMail");
+const usersSocket = require("../../sockets/client/users.socket");
 var md5 = require("md5");
 
 //[GET] /users/not-friend
 module.exports.notFriend = async (req, res) => {
+  //Socket
+  usersSocket(res);
+  //END Socket
   const userId = res.locals.user.id;
+  const myuser = await User.findOne({
+    _id: userId,
+  });
+  const requestFriends = myuser.requestFriends;
+  const acceptFriends = myuser.acceptFriends;
   const users = await User.find({
-    _id: { $ne: userId },
+    $and: [
+      { _id: { $ne: userId } },
+      { _id: { $nin: [requestFriends] } },
+      { _id: { $nin: acceptFriends } },
+    ],
     status: "active",
     deleted: false,
   }).select("id avatar fullName");
