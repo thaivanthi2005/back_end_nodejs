@@ -1,11 +1,12 @@
 const User = require("../../models/user.model");
 
 module.exports = (res) => {
+  //Gửi lời mời kết bạn
   _io.once("connection", async (socket) => {
     socket.on("CLIENT_ADD_FRIEND", async (userId) => {
       const myUserID = res.locals.user.id;
-      console.log(userId); // id của B
-      console.log(myUserID); // id của A
+      // console.log(userId); // id của B
+      // console.log(myUserID); // id của A
 
       //them id của A vào acceptFriends của B
       const exitsIdAinB = await User.findOne({
@@ -41,8 +42,8 @@ module.exports = (res) => {
     //Xóa lời mời đã gửi
     socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
       const myUserID = res.locals.user.id;
-      console.log(userId); // id của B
-      console.log(myUserID); // id của A
+      // console.log(userId); // id của B
+      // console.log(myUserID); // id của A
 
       //Xóa id của A vào acceptFriends của B
       const exitsIdAinB = await User.findOne({
@@ -71,6 +72,43 @@ module.exports = (res) => {
           },
           {
             $pull: { requestFriends: userId },
+          },
+        );
+      }
+    });
+    //TỪ chối kết bạn
+    socket.on("CLIENT_REFUSE_FRIEND", async (userId) => {
+      const myUserID = res.locals.user.id;
+      // console.log(userId); // id của A
+      // console.log(myUserID); // id của B
+
+      //Xóa id của A vào acceptFriends của B
+      const exitsIdAinB = await User.findOne({
+        _id: myUserID,
+        acceptFriends: userId,
+      });
+      if (exitsIdAinB) {
+        await User.updateOne(
+          {
+            _id: myUserID,
+          },
+          {
+            $pull: { acceptFriends: userId },
+          },
+        );
+      }
+      //Xóa id của B vào requestFriends của A
+      const exitsIdBinA = await User.findOne({
+        _id: userId,
+        requestFriends: myUserID,
+      });
+      if (exitsIdBinA) {
+        await User.updateOne(
+          {
+            _id: userId,
+          },
+          {
+            $pull: { requestFriends: myUserID },
           },
         );
       }
