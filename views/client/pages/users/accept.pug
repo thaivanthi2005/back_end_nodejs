@@ -19,8 +19,9 @@ block main
             div(class="inner-info")
               div(class="inner-name") #{user.fullName}
               div(class="inner-buttons")
-                button(class="btn btn-sm btn-primary mr-1", btn-accept-friend=user.id ) Thêm bạn
+                button(class="btn btn-sm btn-primary mr-1", btn-accept-friend=user.id ) Chấp nhận
                 button(class="btn btn-sm btn-secondary mr-1", btn-refuse-friend=user.id) Xóa
                 button(class="btn btn-sm btn-secondary mr-1", btn-deleted-friend disable) Đã xóa
+                button(class="btn btn-sm btn-secondary mr-1", btn-accepted-friend disable) Đã Đã chấp nhận
 block scripts
   script(type="module" src="/js/users.js")
