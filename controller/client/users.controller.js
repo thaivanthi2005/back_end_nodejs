@@ -73,7 +73,7 @@ module.exports.accept = async (req, res) => {
     _id: { $in: acceptFriends },
     status: "active",
     deleted: false,
-  }).select("id avatar fullName");
+  }).select("id avatar fullName acceptFriends");
   res.render("client/pages/users/accept", {
     pagetitle: "Lời Mời Đã Gửi",
     users: users,
