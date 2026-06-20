@@ -10,7 +10,7 @@ block main
       .col-12
         +box-head("LỜI MỜI KẾT BẠN")
 
-    .row
+    .row(data-users-accept=user.id)
       each user in users
         .col-md-6
           div(class="box-user ")
@@ -21,7 +21,7 @@ block main
               div(class="inner-buttons")
                 button(class="btn btn-sm btn-primary mr-1", btn-accept-friend=user.id ) Chấp nhận
                 button(class="btn btn-sm btn-secondary mr-1", btn-refuse-friend=user.id) Xóa
-                button(class="btn btn-sm btn-secondary mr-1", btn-deleted-friend disable) Đã xóa
-                button(class="btn btn-sm btn-secondary mr-1", btn-accepted-friend disable) Đã Đã chấp nhận
+                button(class="btn btn-sm btn-secondary mr-1", btn-deleted-friend disabled) Đã xóa
+                button(class="btn btn-sm btn-secondary mr-1", btn-accepted-friend disabled) Đã Đã chấp nhận
 block scripts
   script(type="module" src="/js/users.js")

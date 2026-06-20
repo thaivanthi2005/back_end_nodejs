@@ -48,6 +48,14 @@ module.exports = (res) => {
         userId: userId,
         lengthAcceptFriends: lengthAcceptFriends,
       });
+      //Lẩy ra độ dài info của A trả về B
+      const infoUserA = await User.findOne({
+        _id: myUserID,
+      }).select("avatar id fullName");
+      socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
+        userId: userId,
+        infoUserA: infoUserA,
+      });
     });
     //Xóa lời mời đã gửi
     socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
