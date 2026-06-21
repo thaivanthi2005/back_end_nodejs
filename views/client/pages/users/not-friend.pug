@@ -10,9 +10,9 @@ block main
       .col-12
         +box-head("Thông tin người dùng")
 
-    .row
+    .row(data-users-not-friend=user.id)
       each user in users
-        .col-md-6
+        .col-md-6(user-id=user.id)
           div(class="box-user")
             div(class="inner-avatar")
               img(src=(user.avatar ? user.avatar : "/images/default.jpg"), alt=user.fullName)

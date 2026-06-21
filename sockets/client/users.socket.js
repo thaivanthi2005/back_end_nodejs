@@ -1,8 +1,8 @@
 const User = require("../../models/user.model");
 
 module.exports = (res) => {
-  //Gửi lời mời kết bạn
   _io.once("connection", async (socket) => {
+    //Gửi lời mời kết bạn
     socket.on("CLIENT_ADD_FRIEND", async (userId) => {
       const myUserID = res.locals.user.id;
       // console.log(userId); // id của B
