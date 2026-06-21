@@ -104,7 +104,7 @@ module.exports = (res) => {
       });
       //Lấy id của ông A và trả về cho ông B
       socket.broadcast.emit("SERVER_RETURN_USER_ID_CANCEL_FRIEND", {
-        userId: userId,
+        userIdB: userId,
         userIdA: myUserID,
       });
     });

@@ -112,7 +112,10 @@ socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
   console.log(boxUserRemove);
   if (boxUserRemove) {
     const dataUserAccept = document.querySelector("[data-users-accept]");
-    dataUserAccept.removeChild(boxUserRemove);
+    const userIdB = badgeUserAccept.getAttribute("badge-users-accept");
+    if (userIdB == data.userIdB) {
+      dataUserAccept.removeChild(boxUserRemove);
+    }
   }
 });
 //SERVER_RETURN_USER_ID_CANCEL_FRIEND
