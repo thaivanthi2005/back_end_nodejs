@@ -18,6 +18,7 @@ const accountSchema = new mongoose.Schema(
     },
     requestFriends: Array,
     acceptFriends: Array,
+    statusOnline: String,
     friendList: [
       {
         user_id: String,
