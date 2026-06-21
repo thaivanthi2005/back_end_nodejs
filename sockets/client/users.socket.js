@@ -57,7 +57,7 @@ module.exports = (res) => {
         infoUserA: infoUserA,
       });
     });
-    //Xóa lời mời đã gửi
+    //Xóa (hủy gửi ) lời mời đã gửi
     socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
       const myUserID = res.locals.user.id;
       // console.log(userId); // id của B
@@ -101,6 +101,11 @@ module.exports = (res) => {
       socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
         userId: userId,
         lengthAcceptFriends: lengthAcceptFriends,
+      });
+      //Lấy id của ông A và trả về cho ông B
+      socket.broadcast.emit("SERVER_RETURN_USER_ID_CANCEL_FRIEND", {
+        userId: userId,
+        userIdA: myUserID,
       });
     });
     //TỪ chối kết bạn

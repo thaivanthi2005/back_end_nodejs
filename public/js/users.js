@@ -1,3 +1,5 @@
+// import { Socket } from "socket.io";
+
 //chức năng gửi yêu cầu
 const listBtnAddFriend = document.querySelectorAll("[btn-add-friend]");
 if (listBtnAddFriend.length > 0) {
@@ -81,6 +83,7 @@ if (dataUserAccept) {
       // vẽ user ra giao diện
       const div = document.createElement("div");
       div.classList.add("col-6");
+      div.setAttribute("user-id", data.infoUserA._id);
       div.innerHTML = `<div class="box-user ">
       <div class="inner-avatar">
       <img src="${data.infoUserA.avatar ? data.infoUserA.avatar : "/images/default.jpg"}"  alt="${data.infoUserA.fullName}"></div>
@@ -101,3 +104,15 @@ if (dataUserAccept) {
 }
 
 //SERVER_RETURN_INFO_ACCEPT_FRIEND
+
+//SERVER_RETURN_USER_ID_CANCEL_FRIEND
+socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
+  const userIdA = data.userIdA;
+  const boxUserRemove = document.querySelector(`[user-id='${userIdA}']`);
+  console.log(boxUserRemove);
+  if (boxUserRemove) {
+    const dataUserAccept = document.querySelector("[data-users-accept]");
+    dataUserAccept.removeChild(boxUserRemove);
+  }
+});
+//SERVER_RETURN_USER_ID_CANCEL_FRIEND
