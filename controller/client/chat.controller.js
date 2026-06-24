@@ -5,12 +5,15 @@ const Chat = require("../../models/chat.model");
 
 const uploadToCloudinary = require("../../helper/uploadToCloudinary");
 const chatSocket = require("../../sockets/client/chat.socket");
+// [GET] /chat/:roomChatId
 module.exports.index = async (req, res) => {
+  const roomChatId = req.params.roomChatId;
   // SocketIo
-  chatSocket(res);
+  chatSocket(req, res);
   // END SocketIo
   // Lay data từ database
   const chats = await Chat.find({
+    room_chat_id: roomChatId,
     deleted: false,
   });
   for (const chat of chats) {
