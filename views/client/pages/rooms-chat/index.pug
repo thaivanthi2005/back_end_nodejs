@@ -15,18 +15,18 @@ block main
         ) Tạo phòng chat
 
     .row
-    //-   each room in rooms
+       each room in listRoomChat
         .col-6
           div(class="box-room")
             div(class="inner-avatar")
               img(
                 src=room.avatar || "https://robohash.org/" + room._id + ".png"
-                alt=room.name
+                alt=room.title
               )
             div(class="inner-info")
-              div(class="inner-name") #{room.name}
+              div(class="inner-name") #{room.title}
               div(class="inner-buttons")
                 a(
-                  href="/rooms-chat/" + room._id
+                  href="/chat/" + room._id
                   class="btn btn-sm btn-primary mr-1"
                 ) Nhắn tin
